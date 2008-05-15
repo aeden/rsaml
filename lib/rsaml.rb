@@ -9,11 +9,18 @@ SAML_NAMESPACES = {
 
 require 'rubygems'
 require 'uuid'
+require 'activesupport'
 
 $:.unshift(File.dirname(__FILE__))
 
 require 'rsaml/assertion'
+require 'rsaml/condition'
+require 'rsaml/conditions'
 require 'rsaml/encrypted'
 require 'rsaml/identifier'
-require 'rsaml/statement'
+require 'rsaml/proxy_restriction'
 require 'rsaml/signature'
+require 'rsaml/statement'
+require 'rsaml/subject'
+require 'rsaml/subject_confirmation'
+require 'rsaml/subject_confirmation_data'

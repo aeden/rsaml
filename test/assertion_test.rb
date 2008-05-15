@@ -3,7 +3,7 @@ require File.dirname(__FILE__) + '/test_helper'
 class AssertionTest < Test::Unit::TestCase
   context "an assertion" do
     setup do
-      issuer = ''
+      issuer = Name.new('example')
       @assertion = Assertion.new(issuer)
     end
     should "require version of 2.0" do

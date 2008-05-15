@@ -25,11 +25,9 @@ module RSAML
     attr_accessor :subject
     
     # Conditions that MUST be evaluated when assessing the validity of and/or when using the assertion.
+    #
+    # conditions should contain a single Conditions object
     attr_accessor :conditions
-    
-    # Additional information related to the assertion that assists processing in certain situations but which 
-    # MAY be ignored by applications that do not understand the advice or do not wish to make use of it.
-    attr_accessor :advice
     
     # Construct a new assertion from the given issuer
     def initialize(issuer)
@@ -44,11 +42,26 @@ module RSAML
       @statements ||= []
     end
     
+    # Additional information related to the assertion that assists processing in certain situations but which 
+    # MAY be ignored by applications that do not understand the advice or do not wish to make use of it.
+    def advice
+      @advice ||= []
+    end
+    
     # Validate the assertion
     def valid?
       return false if statements.length == 0 && subject.nil?
       return false if signature && !signature.valid?
+      if conditions
+        assertion_cache << self unless conditions.cache?
+        return false if !conditions.valid?
+      end
       return true
+    end
+    
+    protected
+    def assertion_cache
+      @assertion_cache ||= []
     end
   end
 end
