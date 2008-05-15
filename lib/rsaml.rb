@@ -13,5 +13,7 @@ require 'uuid'
 $:.unshift(File.dirname(__FILE__))
 
 require 'rsaml/assertion'
+require 'rsaml/encrypted'
 require 'rsaml/identifier'
 require 'rsaml/statement'
+require 'rsaml/signature'

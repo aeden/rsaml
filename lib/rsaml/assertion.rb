@@ -14,15 +14,41 @@ module RSAML
     # The time instant of issue in UTC
     attr_accessor :issue_instant
     
-    def initialize
+    # The SAML authority that is making the claim(s) in the assertion. The issuer SHOULD be unambiguous 
+    # to the intended relying parties.  
+    attr_accessor :issuer
+    
+    # A signature that protects the integrity of and authenticates the issuer of the assertion.
+    attr_accessor :signature
+    
+    # The subject of the statement(s) in the assertion.
+    attr_accessor :subject
+    
+    # Conditions that MUST be evaluated when assessing the validity of and/or when using the assertion.
+    attr_accessor :conditions
+    
+    # Additional information related to the assertion that assists processing in certain situations but which 
+    # MAY be ignored by applications that do not understand the advice or do not wish to make use of it.
+    attr_accessor :advice
+    
+    # Construct a new assertion from the given issuer
+    def initialize(issuer)
+      @issuer = issuer
       @version = "2.0"
       @id = UUID.new
       @issue_instant = Time.now.utc
     end
     
-    # Access the statements in the assertion
+    # Assertion statements
     def statements
       @statements ||= []
+    end
+    
+    # Validate the assertion
+    def valid?
+      return false if statements.length == 0 && subject.nil?
+      return false if signature && !signature.valid?
+      return true
     end
   end
 end

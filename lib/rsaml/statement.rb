@@ -1,5 +1,7 @@
 module RSAML
   class Statement
+    # An xsi:type attribute used to indicate the actual statement type.
+    attr_accessor :type
   end
   
   # The assertion subject was authenticated by a particular means at a particular time.

@@ -17,13 +17,4 @@ module RSAML
     # different from the primary name identifier given469 
     attr_accessor :sp_provided_id
   end
-  class EncryptedId < BaseId
-    # Encrypted data
-    attr_accessor :encrypted_data
-    
-    # Encrypted keys
-    def encrypted_keys
-      @encrypted_keys ||= []
-    end
-  end
 end
