@@ -1,7 +1,7 @@
 module RSAML
   module Statement
     # The assertion subject was authenticated by a particular means at a particular time.
-    class Authentication < Base
+    class AuthenticationStatement < Base
       # Specifies the time at which the authentication took place. The time value is encoded in UTC
       attr_accessor :authn_instant
     

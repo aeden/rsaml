@@ -1,7 +1,7 @@
 module RSAML
   module Statement
     # The assertion subject is associated with the supplied attributes.
-    class Attribute < Base
+    class AttributeStatement < Base
       
     end
   end

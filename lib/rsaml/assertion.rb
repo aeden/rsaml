@@ -91,14 +91,14 @@ module RSAML
       
       # rule: if there is an authentication then there must be a subject
       statements.each do |statement|           
-        if statement.is_a?(Authentication)     
+        if statement.is_a?(AuthenticationStatement)     
           if subject.nil?
             raise ValidationError, "An assertion with an Authentication statement must have a subject"
           else
             break
           end
         end
-        if statement.is_a?(Attribute)
+        if statement.is_a?(AttributeStatement)
           if subject.nil?
             raise ValidationError, "An assertion with an Attribute statement must have a subject"
           else

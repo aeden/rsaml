@@ -31,7 +31,7 @@ class AssertionTest < Test::Unit::TestCase
     end
     context "with an authentication statement" do
       setup do
-        @assertion.statements << Authentication.new
+        @assertion.statements << AuthenticationStatement.new
       end
       should "require a subject" do
         assert_raise ValidationError do
@@ -41,7 +41,7 @@ class AssertionTest < Test::Unit::TestCase
     end
     context "with an attribute statement" do
       setup do
-        @assertion.statements << Attribute.new
+        @assertion.statements << AttributeStatement.new
       end
       should "require a subject" do
         assert_raise ValidationError do
