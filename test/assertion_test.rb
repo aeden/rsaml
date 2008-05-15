@@ -24,15 +24,29 @@ class AssertionTest < Test::Unit::TestCase
         @assertion.subject = 'test'
       end
       should "be valid" do
-        assert @assertion.valid?
+        assert_nothing_raised do
+          @assertion.validate
+        end
       end
     end
-    context "with a statement" do
+    context "with an authentication statement" do
       setup do
         @assertion.statements << Authentication.new
       end
-      should "not require a subject" do
-        @assertion.valid?
+      should "require a subject" do
+        assert_raise ValidationError do
+          @assertion.validate
+        end
+      end
+    end
+    context "with an attribute statement" do
+      setup do
+        @assertion.statements << Attribute.new
+      end
+      should "require a subject" do
+        assert_raise ValidationError do
+          @assertion.validate
+        end
       end
     end
   end

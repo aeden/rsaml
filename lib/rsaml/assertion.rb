@@ -48,26 +48,59 @@ module RSAML
       @advice ||= []
     end
     
-    # Validate the assertion
+    def subject=(value)
+      case value
+      when String: 
+        @subject = Subject.new(Name.new(value))
+      else
+        @subject = value
+      end
+    end
+    
+    # Validate the assertion. If the assertion is valid then this method will return true.
     def valid?
+      begin
+        validate
+      rescue RSAML::ValidationError => e
+        return false
+      end
+      return true
+    end
+        
+    # Validate the assertion. If the assertion is invalid then this method will raise a
+    # ValidationError.
+    def validate
       # rule: if there are no statements there must be a subject
-      return false if statements.length == 0 && subject.nil?   
+      if statements.length == 0 && subject.nil?
+        raise ValidationError, "An assertion with no statements must have a subject"
+      end
 
       # rule: if there is a signature it must be valid
-      return false if signature && !signature.valid?
+      if signature && !signature.valid?
+        raise ValidationError, "An assertion signature must be valid"
+      end
       
       # rule: if there are conditions then they must be valid
       if conditions
         # rule: an assertion cache should be kept if conditions allow it
         assertion_cache << self unless conditions.cache?
-        return false if !conditions.valid?
+        if !conditions.valid?
+          raise ValidationError, "Conditions are not valid"
+        end
       end
       
       # rule: if there is an authentication then there must be a subject
       statements.each do |statement|           
         if statement.is_a?(Authentication)     
           if subject.nil?
-            return false
+            raise ValidationError, "An assertion with an Authentication statement must have a subject"
+          else
+            break
+          end
+        end
+        if statement.is_a?(Attribute)
+          if subject.nil?
+            raise ValidationError, "An assertion with an Attribute statement must have a subject"
           else
             break
           end

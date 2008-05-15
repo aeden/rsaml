@@ -6,6 +6,11 @@ module RSAML
     # The subject identifier
     attr_accessor :identifier
     
+    # Initialize the subject with the given identifier
+    def initialize(identifier=nil)
+      @identifier = identifier
+    end
+    
     # Information that allows the subject to be confirmed. If more than one subject confirmation is provided, 
     # then satisfying any one of them is sufficient to confirm the subject for the purpose of applying the 
     # assertion.

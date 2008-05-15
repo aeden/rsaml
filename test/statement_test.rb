@@ -12,7 +12,8 @@ class StatementTest < Test::Unit::TestCase
   end
   context "an attribute statement" do
     setup do
-      @statement = Attribute.new
+      subject = Subject.new(Name.new('example'))
+      @statement = Attribute.new(subject)
     end
   end
 end

@@ -44,7 +44,18 @@ module RSAML #:nodoc:
     
     # Test for validity of the conditions
     def valid?
-      valid_time_limits? && valid_elements?
+      begin
+        validate
+      rescue ValidationError => e
+        return false
+      end
+      return true
+    end
+    
+    # Raise a ValidationError
+    def validate
+      validate_time_limits
+      validate_elements
     end
     
     # Return true if the condition allows caching of the assertion
@@ -54,28 +65,24 @@ module RSAML #:nodoc:
     
     protected
     # Check time limit validity.
-    def valid_time_limits?
-      return false if not_before && Time.now < not_before
-      return false if not_on_or_after && Time.now >= not_on_or_after
-      return true
+    def validate_time_limits
+      raise ValidationError, "Condition failed: not before" if not_before && Time.now < not_before
+      raise ValidationError, "Condition failed: not on or after" if not_on_or_after && Time.now >= not_on_or_after
     end
     
     # Check condition validity.
-    def valid_elements?
+    def validate_elements
       # Rule 1
       if conditions.empty? && audience_restrictions.empty? && proxy_restriction.nil? && one_time_use.nil?
-        return true
+        return
       end
       
       # Rule 2
-      if conditions.find { |c| !c.valid? }
-        return false
-      end
+      conditions.all { |c| c.validate }
       
       # Rule 3
       
       # Rule 4
-      return true
     end
   end
 end
