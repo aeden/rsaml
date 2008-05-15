@@ -1,5 +1,5 @@
 module RSAML
-  class BaseID
+  class BaseId
     # The security or administrative domain that qualifies the name. This attribute provides a means to 
     # federate names from disparate user stores without collision.
     attr_accessor :name_qualifier
@@ -9,7 +9,7 @@ module RSAML
     # parties.
     attr_accessor :sp_name_qualifier
   end
-  class NameID < BaseID
+  class NameId < BaseId
     # A URI reference representing the classification of string-based identifier information.
     attr_accessor :format
     
@@ -17,7 +17,7 @@ module RSAML
     # different from the primary name identifier given469 
     attr_accessor :sp_provided_id
   end
-  class EncryptedID < BaseID
+  class EncryptedId < BaseId
     # Encrypted data
     attr_accessor :encrypted_data
     

@@ -1,4 +1,7 @@
 module RSAML
+  class Statement
+  end
+  
   # The assertion subject was authenticated by a particular means at a particular time.
   class Authentication < Statement
     
