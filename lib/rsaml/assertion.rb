@@ -50,12 +50,30 @@ module RSAML
     
     # Validate the assertion
     def valid?
-      return false if statements.length == 0 && subject.nil?
+      # rule: if there are no statements there must be a subject
+      return false if statements.length == 0 && subject.nil?   
+
+      # rule: if there is a signature it must be valid
       return false if signature && !signature.valid?
+      
+      # rule: if there are conditions then they must be valid
       if conditions
+        # rule: an assertion cache should be kept if conditions allow it
         assertion_cache << self unless conditions.cache?
         return false if !conditions.valid?
       end
+      
+      # rule: if there is an authentication then there must be a subject
+      statements.each do |statement|           
+        if statement.is_a?(Authentication)     
+          if subject.nil?
+            return false
+          else
+            break
+          end
+        end
+      end
+      
       return true
     end
     

@@ -40,5 +40,9 @@ module RSAML
     # different from the primary name identifier given
     attr_accessor :sp_provided_id
     
+    def format
+      @format ||= Name.formats[:unspecified]
+    end
+    
   end
 end
