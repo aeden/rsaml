@@ -29,7 +29,7 @@ class AssertionTest < Test::Unit::TestCase
     end
     context "with a statement" do
       setup do
-        @assertion.statements << Statement.new
+        @assertion.statements << Authentication.new
       end
       should "not require a subject" do
         @assertion.valid?

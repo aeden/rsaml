@@ -14,6 +14,7 @@ require 'activesupport'
 $:.unshift(File.dirname(__FILE__))
 
 require 'rsaml/assertion'
+require 'rsaml/authentication_context'
 require 'rsaml/condition'
 require 'rsaml/conditions'
 require 'rsaml/encrypted'
@@ -24,3 +25,4 @@ require 'rsaml/statement'
 require 'rsaml/subject'
 require 'rsaml/subject_confirmation'
 require 'rsaml/subject_confirmation_data'
+require 'rsaml/subject_locality'

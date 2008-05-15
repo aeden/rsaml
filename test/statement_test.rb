@@ -10,4 +10,9 @@ class StatementTest < Test::Unit::TestCase
       assert @statement.authn_instant.utc?
     end
   end
+  context "an attribute statement" do
+    setup do
+      @statement = Attribute.new
+    end
+  end
 end
