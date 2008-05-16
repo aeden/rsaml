@@ -48,6 +48,12 @@ module RSAML #:nodoc:
       assert_elements
     end
     
+    def validate
+      if not_before && not_on_or_after && not_before >= not_on_or_after
+        raise ValidationError, "NotBefore after NotOnOrAfter"
+      end
+    end
+    
     # Return true if the condition allows caching of the assertion
     def cache?
       one_time_use.nil?
