@@ -30,5 +30,12 @@ module RSAML
     def elements
       @elements = []
     end
+    
+    # Confirm the subject confirmation data
+    def confirm
+      raise ConfirmationError, "Subject confirmation failed: not before" if not_before && Time.now < not_before
+      raise ConfirmationError, "Subject confirmation failed: not on or after" if not_on_or_after && Time.now >= not_on_or_after
+      # TODO implement tests for remaining elements such as recipient, in_response_to and address
+    end
   end
 end

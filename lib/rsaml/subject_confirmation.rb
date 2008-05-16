@@ -20,5 +20,15 @@ module RSAML
     
     # Additional confirmation information to be used by a specific confirmation method.
     attr_accessor :subject_confirmation_data
+    
+    def initialize(method)
+      @method = method
+    end
+    
+    # Construct an XML fragment representing the subject confirmation
+    def to_xml(xml=Builder::XmlMarkup.new)
+      attributes = {'Method' => method}
+      xml.tag!('SubjectConfirmation', attributes)
+    end
   end
 end

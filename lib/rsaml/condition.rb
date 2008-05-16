@@ -1,17 +1,7 @@
 module RSAML
   class Condition
-    # Return true if the condition is valid
-    def valid?
-      begin
-        validate
-      rescue ValidationError => e
-        return false
-      end
-      return true
-    end
-    
-    # Raise an error unless the condition is valid
-    def validate
+    # Assert that the condition evaluates to true, raise an AssertionError if not
+    def assert
       
     end
   end

@@ -10,7 +10,9 @@ class ConditionsTest < Test::Unit::TestCase
       assert_equal 0, @conditions.length
     end
     should "be valid with 0 conditions" do
-      assert @conditions.valid?
+      assert_nothing_raised do
+        @conditions.assert
+      end
     end
     should "be cacheable" do
       assert @conditions.cache?

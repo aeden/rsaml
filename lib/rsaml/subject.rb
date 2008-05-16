@@ -17,5 +17,13 @@ module RSAML
     def subject_confirmations
       @subject_confirmations ||= []
     end
+    
+    # Construct an XML fragment representing the subject
+    def to_xml(xml=Builder::XmlMarkup.new)
+      xml.tag!('Subject') {
+        xml << identifier.to_xml unless identifier.nil?
+        xml << subject_confirmations.map { |sc| sc.to_xml }.join
+      }
+    end
   end
 end
