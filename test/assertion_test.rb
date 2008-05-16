@@ -49,5 +49,15 @@ class AssertionTest < Test::Unit::TestCase
         end
       end
     end
+    context "with a authorization decision statement" do
+      setup do
+        @assertion.statements << AuthorizationDecisionStatement.new
+      end
+      should "require a subject" do
+        assert_raise ValidationError do
+          @assertion.validate
+        end
+      end
+    end
   end
 end

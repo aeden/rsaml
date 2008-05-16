@@ -91,16 +91,9 @@ module RSAML
       
       # rule: if there is an authentication then there must be a subject
       statements.each do |statement|           
-        if statement.is_a?(AuthenticationStatement)     
+        if [AuthenticationStatement, AttributeStatement, AuthorizationDecisionStatement].include?(statement.class)
           if subject.nil?
-            raise ValidationError, "An assertion with an Authentication statement must have a subject"
-          else
-            break
-          end
-        end
-        if statement.is_a?(AttributeStatement)
-          if subject.nil?
-            raise ValidationError, "An assertion with an Attribute statement must have a subject"
+            raise ValidationError, "An assertion with an #{statement.class.name} must have a subject"
           else
             break
           end
