@@ -51,7 +51,7 @@ module RSAML #:nodoc:
     def subject=(value)
       case value
       when String: 
-        @subject = Subject.new(Name.new(value))
+        @subject = Subject.new(Identifier::Issuer.new(value))
       else
         @subject = value
       end
