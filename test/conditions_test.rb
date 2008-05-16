@@ -48,5 +48,28 @@ class ConditionsTest < Test::Unit::TestCase
         end
       end
     end
+  
+    context "when producing xml" do
+      setup do
+        @conditions = Conditions.new
+      end
+      should "optionally include NotBefore attribute" do
+        t = @conditions.not_before = Time.now
+        assert_equal %Q(<Conditions NotBefore="#{t.xmlschema}"></Conditions>), @conditions.to_xml
+      end
+      should "optionally include NotOnOrAfter attribute" do
+        t = @conditions.not_on_or_after = Time.now
+        assert_equal %Q(<Conditions NotOnOrAfter="#{t.xmlschema}"></Conditions>), @conditions.to_xml
+      end
+      should "optionally include conditions" do
+        @conditions << Condition.new
+        assert_equal "<Conditions><Condition/></Conditions>", @conditions.to_xml
+      end
+      should "optionally include audience restriction" do
+        audience = 'http://example.org/audience_terms'
+        @conditions.audience_restrictions << audience
+        assert_equal "<Conditions><AudienceRestriction><Audience>#{audience}</Audience></AudienceRestriction></Conditions>", @conditions.to_xml
+      end
+    end
   end
 end

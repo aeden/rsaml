@@ -38,6 +38,8 @@ module RSAML #:nodoc:
     
     # Specifies that the assertion is addressed to a particular audience.
     # Audiences are represented as A URI reference that identifies an intended audience.
+    # A URI may reference a document that describes the terms of service for audience
+    # membership.
     def audience_restrictions
       @audience_restrictions ||= []
     end
@@ -48,6 +50,7 @@ module RSAML #:nodoc:
       assert_elements
     end
     
+    # Validate the structure of the conditions model
     def validate
       if not_before && not_on_or_after && not_before >= not_on_or_after
         raise ValidationError, "NotBefore after NotOnOrAfter"
@@ -57,6 +60,19 @@ module RSAML #:nodoc:
     # Return true if the condition allows caching of the assertion
     def cache?
       one_time_use.nil?
+    end
+    
+    # Construct an XML fragment representing the conditions collection
+    def to_xml(xml=Builder::XmlMarkup.new)
+      attributes = {}
+      attributes['NotBefore'] = not_before.xmlschema unless not_before.nil?
+      attributes['NotOnOrAfter'] = not_on_or_after.xmlschema unless not_on_or_after.nil?
+      xml.tag!('Conditions', attributes) {
+        conditions.each { |condition| xml << condition.to_xml }
+        audience_restrictions.each do |ar|
+          xml.tag!('AudienceRestriction') { xml.tag!('Audience', ar) }
+        end
+      }
     end
     
     protected
