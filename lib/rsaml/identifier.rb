@@ -44,5 +44,13 @@ module RSAML
       @format ||= Name.formats[:unspecified]
     end
     
+    def to_xml(xml=Builder::XmlMarkup.new)
+      attributes = {'Format' => format}
+      attributes['NameQualifier'] = name_qualifier unless name_qualifier.nil?
+      attributes['SPNameQualifier'] = sp_name_qualifier unless sp_name_qualifier.nil?
+      attributes['SPProvidedID'] = sp_provided_id unless sp_provided_id.nil?
+      xml.tag!('NameID', value, attributes)
+    end
+    
   end
 end
