@@ -1,4 +1,4 @@
-module RSAML
+module RSAML #:nodoc:
   # An assertion is a package of information that supplies zero or more statements made by a SAML 
   # authority.
   class Assertion
@@ -91,7 +91,7 @@ module RSAML
       
       # rule: if there is an authentication then there must be a subject
       statements.each do |statement|           
-        if [AuthenticationStatement, AttributeStatement, AuthorizationDecisionStatement].include?(statement.class)
+        if statement_classes.include?(statement.class)
           if subject.nil?
             raise ValidationError, "An assertion with an #{statement.class.name} must have a subject"
           else
@@ -106,6 +106,10 @@ module RSAML
     protected
     def assertion_cache
       @assertion_cache ||= []
+    end
+    
+    def statement_classes
+      [AuthenticationStatement, AttributeStatement, AuthorizationDecisionStatement]
     end
   end
 end

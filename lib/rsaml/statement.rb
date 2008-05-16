@@ -1,4 +1,5 @@
 module RSAML #:nodoc
+  # Module that contain SAML statements.
   module Statement
   end
 end
