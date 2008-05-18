@@ -31,7 +31,7 @@ class AssertionTest < Test::Unit::TestCase
     end
     context "with an authentication statement" do
       setup do
-        @assertion.statements << AuthenticationStatement.new
+        @assertion.statements << AuthenticationStatement.new(AuthenticationContext.new)
       end
       should "require a subject" do
         assert_raise ValidationError do
@@ -96,7 +96,11 @@ class AssertionTest < Test::Unit::TestCase
         assert_match(/<Advice><AssertionIDRef>#{uuid_match}<\/AssertionIDRef>/, xml)
         assert_match(/<AssertionURIRef>#{uri}<\/AssertionURIRef><\/Advice>/, xml)
       end
-      should_eventually "optionally include statements"
+      should "optionally include statements" do
+        @assertion.statements << AuthenticationStatement.new(AuthenticationContext.new)
+        xml = @assertion.to_xml
+        assert_match(/<AuthnStatement AuthnInstant="#{date_match}"/, xml)
+      end
     end
   end
 end

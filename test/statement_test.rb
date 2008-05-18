@@ -3,8 +3,7 @@ require File.dirname(__FILE__) + '/test_helper'
 class StatementTest < Test::Unit::TestCase
   context "an authentication statement" do
     setup do
-      @statement = AuthenticationStatement.new
-      @statement.authn_context = AuthenticationContext.new
+      @statement = AuthenticationStatement.new(AuthenticationContext.new())
     end
     should "always have a UTC time for authn_instant" do
       assert_not_nil @statement.authn_instant

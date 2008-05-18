@@ -30,3 +30,5 @@ module RSAML
     end
   end
 end
+
+require 'rsaml/authn_context/authentication_context_declaration'

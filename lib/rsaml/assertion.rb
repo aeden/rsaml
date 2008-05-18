@@ -35,7 +35,10 @@ module RSAML #:nodoc:
   class EncryptedAssertion < Encrypted
     # Construct an XML fragment representing the encrypted assertion
     def to_xml(xml=Builder::XmlMarkup.new)
-      xml.tag!('EncryptedAssertion')
+      xml.tag!('EncryptedAssertion') {
+        xml.tag!('EncryptedData', encrypted_data)
+        encrypted_keys.each { |key| xml << encrypted_key.to_xml }
+      }
     end
   end
   
@@ -140,6 +143,7 @@ module RSAML #:nodoc:
         xml << subject.to_xml unless subject.nil?
         xml << conditions.to_xml unless conditions.nil? || conditions.empty?
         advice.each { |a| xml << a.to_xml }
+        statements.each { |s| xml << s.to_xml }
       }
     end
     

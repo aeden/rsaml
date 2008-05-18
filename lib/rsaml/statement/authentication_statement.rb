@@ -21,10 +21,12 @@ module RSAML
       # apparently authenticated.
       attr_accessor :subject_locality
     
+      # The authentication context.
       attr_accessor :authn_context
     
       # Initialize the statement
-      def initialize
+      def initialize(authn_context)
+        @authn_context = authn_context
         @authn_instant = Time.now.utc
       end
       
