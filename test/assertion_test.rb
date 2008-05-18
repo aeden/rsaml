@@ -67,8 +67,8 @@ class AssertionTest < Test::Unit::TestCase
         xml = @assertion.to_xml
         assert_match(/^<Assertion/, xml)
         assert_match(/Version="2.0"/, xml)
-        assert_match(/ID="[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}"/, xml)
-        assert_match(/IssueInstant="\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z"/, xml)
+        assert_match(/ID="#{uuid_match}"/, xml)
+        assert_match(/IssueInstant="#{date_match}"/, xml)
         assert_match(/<Issuer/, xml)
       end
       should "optionally include a signature" do
@@ -86,7 +86,16 @@ class AssertionTest < Test::Unit::TestCase
         xml = @assertion.to_xml
         assert_match(/<Conditions>/, xml)
       end
-      should_eventually "optionally include advice"
+      should "optionally include advice" do
+        uri = 'http://example.com/some_advice'
+        advice = Advice.new
+        advice.assertions << AssertionIDRef.new(UUID.new)
+        advice.assertions << AssertionURIRef.new(uri) # a URI
+        @assertion.advice << advice
+        xml = @assertion.to_xml
+        assert_match(/<Advice><AssertionIDRef>#{uuid_match}<\/AssertionIDRef>/, xml)
+        assert_match(/<AssertionURIRef>#{uri}<\/AssertionURIRef><\/Advice>/, xml)
+      end
       should_eventually "optionally include statements"
     end
   end

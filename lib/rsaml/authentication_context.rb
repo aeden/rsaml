@@ -7,15 +7,26 @@ module RSAML
     # declaration that follows.
     attr_accessor :class_reference
     
-    # Either an authentication context declaration provided by value, or a URI reference that 
-    # identifies such a declaration. The URI reference MAY directly resolve into an XML document 
-    # containing the referenced declaration.
+    # An authentication context declaration provided by value.
     attr_accessor :context_declaration
+    
+    # A URI reference that identifies a declaration. The URI reference MAY directly resolve into 
+    # an XML document containing the referenced declaration.
+    attr_accessor :context_declaration_ref
     
     # Zero or more unique identifiers of authentication authorities that were involved in the 
     # authentication of the principal
     def authenticating_authority
       @authenticating_authority ||= []
+    end
+    
+    # Construct an XML fragment representing the authentication statement
+    def to_xml(xml=Builder::XmlMarkup.new)
+      xml.tag!('AuthnContext') {
+        xml.tag!('AuthnContextClassRef', class_reference) unless class_reference.nil?
+        xml.tag!('AuthnContextDecl', context_declaration) unless context_declaration.nil?
+        xml.tag!('AuthnContextDeclRef', context_declaration_ref) unless context_declaration_ref.nil?
+      }
     end
   end
 end

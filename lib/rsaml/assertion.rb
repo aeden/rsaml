@@ -1,4 +1,44 @@
 module RSAML #:nodoc:
+  # Reference to an assertion via URI
+  class AssertionURIRef
+    # The URI reference
+    attr_accessor :uri
+    
+    # Initialize the AssertionURIRef with the given URI
+    def initialize(uri)
+      @uri = uri
+    end
+    
+    # Construct an XML fragment representing the assertion uri ref
+    def to_xml(xml=Builder::XmlMarkup.new)
+      xml.tag!('AssertionURIRef', uri)
+    end
+  end
+  
+  # Reference to an assertion via ID
+  class AssertionIDRef
+    # The ID reference
+    attr_accessor :id
+    
+    # Initialize the AssertionIDRef with the given assertion ID
+    def initialize(id)
+      @id = id
+    end
+    
+    # Construct an XML fragment representing the assertion ID ref
+    def to_xml(xml=Builder::XmlMarkup.new)
+      xml.tag!('AssertionIDRef', id)
+    end
+  end
+  
+  # An encrypted assertion
+  class EncryptedAssertion < Encrypted
+    # Construct an XML fragment representing the encrypted assertion
+    def to_xml(xml=Builder::XmlMarkup.new)
+      xml.tag!('EncryptedAssertion')
+    end
+  end
+  
   # An assertion is a package of information that supplies zero or more statements made by a SAML 
   # authority.
   class Assertion
@@ -99,6 +139,7 @@ module RSAML #:nodoc:
         xml << signature.to_xml unless signature.nil?
         xml << subject.to_xml unless subject.nil?
         xml << conditions.to_xml unless conditions.nil? || conditions.empty?
+        advice.each { |a| xml << a.to_xml }
       }
     end
     

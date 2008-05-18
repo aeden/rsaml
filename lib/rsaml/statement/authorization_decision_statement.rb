@@ -31,6 +31,11 @@ module RSAML #:nodoc:
       def evidence
         @evidence ||= []
       end
+      
+      # Construct an XML fragment representing the authorization decision statement
+      def to_xml(xml=Builder::XmlMarkup.new)
+        xml.tag!('AuthzStatement')
+      end
     end
   end
 end

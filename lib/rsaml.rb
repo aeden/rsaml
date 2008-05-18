@@ -13,16 +13,21 @@ require 'activesupport'
 
 $:.unshift(File.dirname(__FILE__))
 
+require 'rsaml/ext/string'
+
+require 'rsaml/encrypted'
+require 'rsaml/validator'
+require 'rsaml/errors'
+
 require 'rsaml/action'
 require 'rsaml/action_namespace'
+require 'rsaml/advice'
 require 'rsaml/assertion'
 require 'rsaml/attribute'
 require 'rsaml/audience'
 require 'rsaml/authentication_context'
 require 'rsaml/condition'
 require 'rsaml/conditions'
-require 'rsaml/encrypted'
-require 'rsaml/errors'
 require 'rsaml/evidence'
 require 'rsaml/identifier'
 require 'rsaml/proxy_restriction'
@@ -32,4 +37,3 @@ require 'rsaml/subject'
 require 'rsaml/subject_confirmation'
 require 'rsaml/subject_confirmation_data'
 require 'rsaml/subject_locality'
-require 'rsaml/validator'
