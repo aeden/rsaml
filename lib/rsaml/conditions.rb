@@ -36,6 +36,11 @@ module RSAML #:nodoc:
       conditions.length
     end
     
+    # Return true if the conditions collection is empty
+    def empty?
+      conditions.length == 0
+    end
+    
     # Specifies that the assertion is addressed to a particular audience.
     # Audiences are represented as A URI reference that identifies an intended audience.
     # A URI may reference a document that describes the terms of service for audience

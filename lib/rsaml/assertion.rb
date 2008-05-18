@@ -37,6 +37,11 @@ module RSAML #:nodoc:
       @issue_instant = Time.now.utc
     end
     
+    # Conditions collection
+    def conditions
+      @conditions ||= Conditions.new
+    end
+    
     # Assertion statements
     def statements
       @statements ||= []
@@ -93,6 +98,7 @@ module RSAML #:nodoc:
         xml << issuer.to_xml
         xml << signature.to_xml unless signature.nil?
         xml << subject.to_xml unless subject.nil?
+        xml << conditions.to_xml unless conditions.nil? || conditions.empty?
       }
     end
     

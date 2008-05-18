@@ -81,7 +81,11 @@ class AssertionTest < Test::Unit::TestCase
         xml = @assertion.to_xml
         assert_match(%Q(<Subject><NameID Format="urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified">The Subject</NameID></Subject>), xml)
       end
-      should_eventually "optionally include conditions"
+      should "optionally include conditions" do
+        @assertion.conditions << Condition.new
+        xml = @assertion.to_xml
+        assert_match(/<Conditions>/, xml)
+      end
       should_eventually "optionally include advice"
       should_eventually "optionally include statements"
     end
