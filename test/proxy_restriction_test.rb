@@ -10,6 +10,11 @@ class ProxyRestrictionTest < Test::Unit::TestCase
         @proxy_restriction.count = 1
         assert_equal '<ProxyRestriction Count="1"></ProxyRestriction>', @proxy_restriction.to_xml
       end
+      should "optionally include audiences" do
+        audience = Audience.new('some_uri')
+        @proxy_restriction.audiences << audience
+        assert_equal '<ProxyRestriction><Audience>some_uri</Audience></ProxyRestriction>', @proxy_restriction.to_xml
+      end
     end
   end
 end

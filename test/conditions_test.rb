@@ -66,9 +66,18 @@ class ConditionsTest < Test::Unit::TestCase
         assert_equal "<Conditions><Condition/></Conditions>", @conditions.to_xml
       end
       should "optionally include audience restriction" do
-        audience = 'http://example.org/audience_terms'
+        audience = Audience.new('http://example.org/audience_terms')
         @conditions.audience_restrictions << audience
-        assert_equal "<Conditions><AudienceRestriction><Audience>#{audience}</Audience></AudienceRestriction></Conditions>", @conditions.to_xml
+        assert_equal "<Conditions><AudienceRestriction><Audience>#{audience.uri}</Audience></AudienceRestriction></Conditions>", @conditions.to_xml
+      end
+      should "optionally include a proxy restriction" do
+        proxy_restriction = ProxyRestriction.new
+        @conditions.proxy_restriction = proxy_restriction
+        assert_equal "<Conditions><ProxyRestriction></ProxyRestriction></Conditions>", @conditions.to_xml
+      end
+      should "optionally include a one time use" do
+        @conditions.one_time_use = true
+        assert_equal "<Conditions><OneTimeUse/></Conditions>", @conditions.to_xml
       end
     end
   end
