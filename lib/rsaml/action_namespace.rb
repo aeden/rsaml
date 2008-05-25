@@ -1,4 +1,5 @@
 module RSAML #:nodoc:
+  # Namespaces for actions.
   class ActionNamespace
     # A Hash of predefined namespaces from the SAML 2.0 specification. The value for each
     # key/value pair is an ActionNamespace instance with a URI and set of action names.

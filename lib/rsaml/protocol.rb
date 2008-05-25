@@ -1,4 +1,4 @@
-module RSAML
+module RSAML #:nodoc:
   # The protocol module contains request and response classes for the SAML protocol implementation
   module Protocol 
   end

@@ -1,5 +1,5 @@
-module RSAML
-  module Identifier
+module RSAML #:nodoc:
+  module Identifier #:nodoc:
     # provides information about the issuer of a SAML assertion or protocol message. T
     # Requires the use of a string to carry the issuer's name  
     class Issuer < Name

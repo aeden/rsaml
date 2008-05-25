@@ -1,5 +1,5 @@
-module RSAML
-  module Protocol
+module RSAML #:nodoc:
+  module Protocol #:nodoc:
     # An AuthnQuery is used to make the query "What assertions containing authentication statements 
     # are available for this subject?" A successful response will contain one or more assertions containing 
     # authentication statements.

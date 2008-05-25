@@ -1,5 +1,6 @@
-module RSAML
-  module Identifier
+module RSAML #:nodoc:
+  module Identifier #:nodoc:
+    # A Name identifier.
     class Name < Base
       # The following identifiers MAY be used to refer to the classification of the attribute name 
       # for purposes of interpreting the name.
@@ -31,6 +32,7 @@ module RSAML
         @value = value
       end
     
+      # The format of the name.
       def format
         @format ||= Name.formats[:unspecified]
       end

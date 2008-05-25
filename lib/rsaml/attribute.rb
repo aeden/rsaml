@@ -47,6 +47,7 @@ module RSAML #:nodoc:
     end
   end
   
+  # An encrypted attribute.
   class EncryptedAttribute < Encrypted
     
     # Validate the structure

@@ -1,4 +1,6 @@
 module RSAML #:nodoc:
+  # Contains any additional information that the SAML authority wishes to provide. This information MAY be 
+  # ignored by applications without affecting either the semantics or the validity of the assertion.
   class Advice
     # Contains a mixture of zero or more Assertion, EncryptedAssertion, assertion IDs, and assertion URIs.
     # May also contain custom objects that produce namespace-qualified XML for non-SAML elements.

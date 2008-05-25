@@ -1,4 +1,4 @@
-module RSAML
+module RSAML #:nodoc:
   # Specifies the context of an authentication event. The element can contain 
   # an authentication context class reference, an authentication context declaration 
   # or declaration reference, or both.
