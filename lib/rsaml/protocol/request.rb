@@ -24,11 +24,23 @@ module RSAML #:nodoc:
       # the sending of this request.
       attr_accessor :consent
       
+      # Identifies the entity that generated the request message.
+      attr_accessor :issuer
+      
+      # An XML Signature that authenticates the requester and provides message integrity.
+      attr_accessor :signature
+      
       # Initialize the Request instance
       def initialize(id)
         @id = id
         @version = "2.0"
         @issue_instant = Time.now.utc
+      end
+      
+      # This extension point contains optional protocol message extension elements that are agreed on 
+      # between the communicating parties.
+      def extensions
+        @extionsion ||= []
       end
       
       # Validate the request structure
@@ -44,7 +56,11 @@ module RSAML #:nodoc:
         attributes = {'ID' => id, 'Version' => version, 'IssueInstant' => issue_instant.xmlschema}
         attributes['Destination'] = destination unless destination.nil?
         attributes['Consent'] = consent unless consent.nil?
-        xml.tag!('samlp:Request', attributes)
+        xml.tag!('samlp:Request', attributes) {
+          xml << issuer.to_xml unless issuer.nil?
+          xml << signature.to_xml unless signature.nil?
+          # TODO: add extensions support
+        }
       end
     end
   end
