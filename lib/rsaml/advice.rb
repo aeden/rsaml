@@ -1,4 +1,4 @@
-module RSAML
+module RSAML #:nodoc:
   class Advice
     # Contains a mixture of zero or more Assertion, EncryptedAssertion, assertion IDs, and assertion URIs.
     # May also contain custom objects that produce namespace-qualified XML for non-SAML elements.

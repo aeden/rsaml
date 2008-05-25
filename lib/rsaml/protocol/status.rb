@@ -8,12 +8,15 @@ module RSAML #:nodoc:
       # A message which MAY be returned to an operator.
       attr_accessor :status_message
       
-      # Additional information concerning the status of the request.
-      attr_accessor :status_detail
-      
       # Initialize the status with the given status code
       def initialize(status_code)
         @status_code = status_code
+      end
+      
+      # Additional information concerning the status of the request. All objects in the collection must
+      # respond to the to_xml method.
+      def status_detail
+        @status_detail ||= []
       end
       
       # Validate the structure of the Status instance
@@ -27,7 +30,7 @@ module RSAML #:nodoc:
         xml.tag!('samlp:Status') {
           xml << status_code.to_xml unless status_code.nil?
           xml.tag!('StatusMessage', status_message) unless status_message.nil?
-          xml.tag!('StatusDetail', status_detail) unless status_detail.nil?
+          status_detail.each { |status_detail| xml << status_detail.to_xml }
         }
       end
     end

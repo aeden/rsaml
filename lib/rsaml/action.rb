@@ -1,9 +1,5 @@
 module RSAML
   class Action
-    def ns
-      'saml'
-    end
-    
     # Identifiers that MAY be used in the namespace attribute of the Action element to refer to 
     # common sets of actions to perform on resources.
     #
