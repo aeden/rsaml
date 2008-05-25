@@ -4,4 +4,7 @@ module RSAML
   end
 end
 
+require 'rsaml/protocol/status_code'
+require 'rsaml/protocol/status'
 require 'rsaml/protocol/request'
+require 'rsaml/protocol/response'
