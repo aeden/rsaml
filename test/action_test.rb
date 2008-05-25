@@ -8,5 +8,10 @@ class ActionTest < Test::Unit::TestCase
     should "have the rwedc_negation namespace by default" do
       assert_equal Action.namespaces[:rwedc_negation], @action.namespace
     end
+    context "when producing xml" do
+      should "optionally have a namespace" do
+        assert_match(/<Action Namespace="#{@action.namespace}"/, @action.to_xml)
+      end
+    end
   end
 end

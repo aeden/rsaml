@@ -28,5 +28,10 @@ module RSAML #:nodoc:
       @uri = uri
       @action_names = action_names
     end
+    
+    # Return a string representation, specifically the URI for the namespace.
+    def to_s
+      uri
+    end
   end
 end

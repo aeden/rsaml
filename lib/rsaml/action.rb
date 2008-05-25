@@ -18,5 +18,16 @@ module RSAML
     def namespace
       @namespace ||= Action.namespaces[:rwedc_negation]
     end
+    
+    # Validate the structure
+    def validate
+    end
+    
+    # Construct an XML fragment representing the action
+    def to_xml(xml=Builder::XmlMarkup.new)
+      attributes = {}
+      attributes['Namespace'] = namespace unless namespace.nil?
+      xml.tag!('Action', attributes)
+    end
   end
 end

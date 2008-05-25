@@ -36,7 +36,7 @@ module RSAML #:nodoc:
       @extra_xml_attributes ||= {}
     end
     
-    # Construct an XML fragment representing the authentication statement
+    # Construct an XML fragment representing the attribute
     def to_xml(xml=Builder::XmlMarkup.new)
       xml_attributes = {'Name' => name}
       xml_attributes['NameFormat'] = name_format unless name_format.nil?
@@ -54,6 +54,19 @@ module RSAML #:nodoc:
     # Encrypted keys
     def encrypted_keys
       @encrypted_keys ||= []
+    end
+    
+    # Validate the structure
+    def validate
+      raise ValidationError, "Encrypted data is required" if encrypted_data.nil?
+    end
+    
+    # Construct an XML fragment representing the encrypted attribute
+    def to_xml(xml=Builder::XmlMarkup.new)
+      xml.tag!('EncryptedAttribute') {
+        xml.tag!('EncryptedData', encrypted_data)
+        encrypted_keys.each { |key| xml << key.to_xml }
+      }
     end
   end
 end

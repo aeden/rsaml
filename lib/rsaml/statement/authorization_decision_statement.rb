@@ -32,9 +32,21 @@ module RSAML #:nodoc:
         @evidence ||= []
       end
       
+      # Validate the structure
+      def validate
+        raise ValidationError, "Resource is required" if resource.nil?
+        raise ValidationError, "Decision is required" if decision.nil?
+        raise ValidationError, "One or more actions must be specified" if actions.empty?
+        actions.each { |action| action.validate }
+      end
+      
       # Construct an XML fragment representing the authorization decision statement
       def to_xml(xml=Builder::XmlMarkup.new)
-        xml.tag!('AuthzStatement')
+        attributes = {'Resource' => resource, 'Decision' => decision}
+        xml.tag!('AuthzStatement', attributes) {
+          actions.each { |action| xml << action.to_xml }
+          evience.each { |e| xml << e.to_xml }
+        }
       end
     end
   end

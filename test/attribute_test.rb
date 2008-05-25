@@ -40,4 +40,17 @@ class AttributeTest < Test::Unit::TestCase
       end
     end
   end
+  
+  context "an encrypted attribute" do
+    setup do
+      @encrypted_attribute = EncryptedAttribute.new
+    end
+    should_eventually "be valid" do
+      assert_nothing_raised do
+        @encrypted_attribute.validate
+      end
+    end
+    should_eventually "always include encrypted data"
+    should_eventually "optionally include encrypted keys"
+  end
 end

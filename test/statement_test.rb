@@ -59,6 +59,32 @@ class StatementTest < Test::Unit::TestCase
   end
   
   context "an authorization decision statement" do
-    
+    setup do
+      @statement = AuthorizationDecisionStatement.new
+      @statement.resource = 'file://some/resource'
+      @statement.decision = 'Permit'
+      @statement.actions << Action.new
+    end
+    should "be valid" do
+      assert_nothing_raised { @statement.validate }
+    end
+    should "not be valid if resource is nil" do
+      assert_raise ValidationError do
+        @statement.resource = nil
+        @statement.validate
+      end
+    end
+    should "not be valid if decision is nil" do
+      assert_raise ValidationError do
+        @statement.decision = nil
+        @statement.validate
+      end
+    end
+    should "not be valid if no actions are specified" do
+      assert_raise ValidationError do
+        @statement.actions.clear
+        @statement.validate
+      end
+    end
   end
 end
