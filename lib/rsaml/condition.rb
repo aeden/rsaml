@@ -1,4 +1,4 @@
-module RSAML
+module RSAML #:nodoc
   class Condition
     # Assert that the condition evaluates to true, raise an AssertionError if not
     def assert

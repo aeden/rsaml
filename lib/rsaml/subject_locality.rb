@@ -1,4 +1,4 @@
-module RSAML
+module RSAML #:nodoc:
   # This element is entirely advisory, since both of these fields are quite easily “spoofed,” 
   # but may be useful information in some applications.
   class SubjectLocality
@@ -16,7 +16,7 @@ module RSAML
       end
     end
     
-    # Construct an XML fragment representing the authentication statement
+    # Construct an XML fragment representing the subject locality
     def to_xml(xml=Builder::XmlMarkup.new)
       attributes = {}
       attributes['Address'] = address unless address.nil?

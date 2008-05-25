@@ -8,6 +8,11 @@ module RSAML #:nodoc:
       @audiences ||= []
     end
     
+    # Validate the structure
+    def validate
+      raise ValidationError, "Count must be 0 or more if specified" if !count.nil? && count < 0
+    end
+    
     # Construct an XML fragment representing the proxy restriction
     def to_xml(xml=Builder::XmlMarkup.new)
       attributes = {}
@@ -17,8 +22,5 @@ module RSAML #:nodoc:
       }
     end
     
-    def validate
-      raise ValidationError, "Count must be 0 or more if specified" if !count.nil? && count < 0
-    end
   end
 end

@@ -1,23 +1,21 @@
-module RSAML
+module RSAML #:nodoc:
+  # Contains one or more assertions or assertion references that the SAML authority relied 
+  # on in issuing the authorization decision.
   class Evidence
-    # Specifies an assertion by reference to the value of the assertion’s ID attribute.
-    def assertion_id_refs
-      @assertion_id_refs ||= []
-    end
-    
-    # Specifies an assertion by means of a URI reference.
-    def assertion_uri_refs
-      @assertion_uri_refs ||= []
-    end
-    
-    # Specifies an assertion by value.
+    # Specifies an assertion either by reference or by value.
     def assertions
       @assertions ||= []
     end
     
-    # Specifies an encrypted assertion by value.
-    def encrypted_assertions
-      @encrypted_assertions ||= []
+    def validate
+      raise ValidationError, "At least one assertion is required" if assertions.empty?
+    end
+    
+    # Construct an XML fragment representing the authentication statement
+    def to_xml(xml=Builder::XmlMarkup.new)
+      xml.tag!('Evidence') {
+        assertions.each { |assertion| xml << assertion.to_xml }
+      }
     end
   end
 end

@@ -47,14 +47,7 @@ module RSAML #:nodoc:
     end
   end
   
-  class EncryptedAttribute
-    # Encrypted data
-    attr_accessor :encrypted_data
-    
-    # Encrypted keys
-    def encrypted_keys
-      @encrypted_keys ||= []
-    end
+  class EncryptedAttribute < Encrypted
     
     # Validate the structure
     def validate

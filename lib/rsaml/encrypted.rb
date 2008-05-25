@@ -1,4 +1,5 @@
 module RSAML #:nodoc:
+  # Base for encrypted elements
   class Encrypted
     # Encrypted data
     attr_accessor :encrypted_data
