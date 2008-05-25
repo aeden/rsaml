@@ -17,6 +17,16 @@ class AttributeTest < Test::Unit::TestCase
         @attribute.friendly_name = 'email'
         assert_match(/FriendlyName="#{@attribute.friendly_name}"/, @attribute.to_xml)
       end
+      should "optionally include a single attribute value child element" do
+        @attribute.values << 'someone@somewhere.com'
+        assert_match(/<AttributeValue>someone@somewhere.com<\/AttributeValue>/, @attribute.to_xml)
+      end
+      should "optionally include multiple attribute value child elements" do
+        @attribute.values << 'someone@somewhere.com'
+        @attribute.values << 'someone@somewhereelse.com'
+        assert_match(/<AttributeValue>someone@somewhere.com<\/AttributeValue>/, @attribute.to_xml)
+        assert_match(/<AttributeValue>someone@somewhereelse.com<\/AttributeValue>/, @attribute.to_xml)
+      end
     end
   end
 end
