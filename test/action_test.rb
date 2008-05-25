@@ -10,7 +10,7 @@ class ActionTest < Test::Unit::TestCase
     end
     context "when producing xml" do
       should "optionally have a namespace" do
-        assert_match(/<Action Namespace="#{@action.namespace}"/, @action.to_xml)
+        assert_match(/<saml:Action Namespace="#{@action.namespace}"/, @action.to_xml)
       end
     end
   end

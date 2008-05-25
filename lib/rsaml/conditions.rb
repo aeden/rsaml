@@ -72,10 +72,10 @@ module RSAML #:nodoc:
       attributes = {}
       attributes['NotBefore'] = not_before.xmlschema unless not_before.nil?
       attributes['NotOnOrAfter'] = not_on_or_after.xmlschema unless not_on_or_after.nil?
-      xml.tag!('Conditions', attributes) {
+      xml.tag!('saml:Conditions', attributes) {
         conditions.each { |condition| xml << condition.to_xml }
         audience_restrictions.each do |audience|
-          xml.tag!('AudienceRestriction') { xml << audience.to_xml }
+          xml.tag!('saml:AudienceRestriction') { xml << audience.to_xml }
         end
         xml.tag!('OneTimeUse') if one_time_use
         xml << proxy_restriction.to_xml unless proxy_restriction.nil?

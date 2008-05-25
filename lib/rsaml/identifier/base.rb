@@ -16,7 +16,7 @@ module RSAML #:nodoc:
         attributes = {}
         attributes['NameQualifier'] = name_qualifier unless name_qualifier.nil?
         attributes['SPNameQualifier'] = sp_name_qualifier unless sp_name_qualifier.nil?
-        xml.tag!('BaseID', '', attributes)
+        xml.tag!('saml:BaseID', '', attributes)
       end
     end
   end

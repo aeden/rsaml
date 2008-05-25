@@ -41,7 +41,7 @@ module RSAML
         attributes['NameQualifier'] = name_qualifier unless name_qualifier.nil?
         attributes['SPNameQualifier'] = sp_name_qualifier unless sp_name_qualifier.nil?
         attributes['SPProvidedID'] = sp_provided_id unless sp_provided_id.nil?
-        xml.tag!('NameID', value, attributes)
+        xml.tag!('saml:NameID', value, attributes)
       end
     
     end

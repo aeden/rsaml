@@ -37,3 +37,5 @@ require 'rsaml/subject'
 require 'rsaml/subject_confirmation'
 require 'rsaml/subject_confirmation_data'
 require 'rsaml/subject_locality'
+
+require 'rsaml/protocol'

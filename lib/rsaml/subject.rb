@@ -20,7 +20,7 @@ module RSAML
     
     # Construct an XML fragment representing the subject
     def to_xml(xml=Builder::XmlMarkup.new)
-      xml.tag!('Subject') {
+      xml.tag!('saml:Subject') {
         xml << identifier.to_xml unless identifier.nil?
         xml << subject_confirmations.map { |sc| sc.to_xml }.join
       }

@@ -28,7 +28,7 @@ module RSAML
     # Construct an XML fragment representing the subject confirmation
     def to_xml(xml=Builder::XmlMarkup.new)
       attributes = {'Method' => method}
-      xml.tag!('SubjectConfirmation', attributes)
+      xml.tag!('saml:SubjectConfirmation', attributes)
     end
   end
 end

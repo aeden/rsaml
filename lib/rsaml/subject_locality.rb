@@ -21,7 +21,7 @@ module RSAML #:nodoc:
       attributes = {}
       attributes['Address'] = address unless address.nil?
       attributes['DNSName'] = dns_name unless dns_name.nil?
-      xml.tag!('SubjectLocality', attributes)
+      xml.tag!('saml:SubjectLocality', attributes)
     end
   end
 end

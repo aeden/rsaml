@@ -22,10 +22,10 @@ module RSAML
     
     # Construct an XML fragment representing the authentication statement
     def to_xml(xml=Builder::XmlMarkup.new)
-      xml.tag!('AuthnContext') {
-        xml.tag!('AuthnContextClassRef', class_reference) unless class_reference.nil?
-        xml.tag!('AuthnContextDecl', context_declaration) unless context_declaration.nil?
-        xml.tag!('AuthnContextDeclRef', context_declaration_ref) unless context_declaration_ref.nil?
+      xml.tag!('saml:AuthnContext') {
+        xml.tag!('saml:AuthnContextClassRef', class_reference) unless class_reference.nil?
+        xml.tag!('saml:AuthnContextDecl', context_declaration) unless context_declaration.nil?
+        xml.tag!('saml:AuthnContextDeclRef', context_declaration_ref) unless context_declaration_ref.nil?
       }
     end
   end

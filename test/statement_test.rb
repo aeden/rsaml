@@ -22,10 +22,10 @@ class StatementTest < Test::Unit::TestCase
     end
     context "when producing xml" do
       should "always include authn_instant" do
-        assert_match(/<AuthnStatement AuthnInstant="#{date_match}">/, @statement.to_xml)
+        assert_match(/<saml:AuthnStatement AuthnInstant="#{date_match}">/, @statement.to_xml)
       end
       should "always include authn_context" do
-        assert_match(/<AuthnContext>/, @statement.to_xml)
+        assert_match(/<saml:AuthnContext>/, @statement.to_xml)
       end
       should "optionally include a session index" do
         @statement.session_index = '12345'
@@ -53,7 +53,7 @@ class StatementTest < Test::Unit::TestCase
     end
     context "when producing xml" do
       should "include at least on attribute" do
-        assert_match(/<AttributeStatement><Attribute Name="email"><AttributeValue>someone@someplace.com<\/AttributeValue><\/Attribute><\/AttributeStatement>/, @statement.to_xml)
+        assert_match(/<saml:AttributeStatement><saml:Attribute Name="email"><saml:AttributeValue>someone@someplace.com<\/saml:AttributeValue><\/saml:Attribute><\/saml:AttributeStatement>/, @statement.to_xml)
       end
     end
   end
@@ -84,6 +84,17 @@ class StatementTest < Test::Unit::TestCase
       assert_raise ValidationError do
         @statement.actions.clear
         @statement.validate
+      end
+    end
+    context "when producing xml" do
+      should "include the AuthzStatement tag" do
+        assert_match(%Q(<saml:AuthzStatement), @statement.to_xml)
+      end
+      should "include a Resource attribute" do
+        assert_match(%Q(Resource="file://some/resource"), @statement.to_xml)
+      end
+      should "include a Decision attribute" do
+        assert_match(%Q(Decision="Permit"), @statement.to_xml)
       end
     end
   end

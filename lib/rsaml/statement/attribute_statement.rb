@@ -18,7 +18,7 @@ module RSAML
       
       # Construct an XML fragment representing the authentication statement
       def to_xml(xml=Builder::XmlMarkup.new)
-        xml.tag!('AttributeStatement') {
+        xml.tag!('saml:AttributeStatement') {
           attributes.each { |attribute| xml << attribute.to_xml }
         }
       end

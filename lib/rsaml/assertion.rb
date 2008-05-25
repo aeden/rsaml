@@ -11,7 +11,7 @@ module RSAML #:nodoc:
     
     # Construct an XML fragment representing the assertion uri ref
     def to_xml(xml=Builder::XmlMarkup.new)
-      xml.tag!('AssertionURIRef', uri)
+      xml.tag!('saml:AssertionURIRef', uri)
     end
   end
   
@@ -27,7 +27,7 @@ module RSAML #:nodoc:
     
     # Construct an XML fragment representing the assertion ID ref
     def to_xml(xml=Builder::XmlMarkup.new)
-      xml.tag!('AssertionIDRef', id)
+      xml.tag!('saml:AssertionIDRef', id)
     end
   end
   
@@ -35,8 +35,8 @@ module RSAML #:nodoc:
   class EncryptedAssertion < Encrypted
     # Construct an XML fragment representing the encrypted assertion
     def to_xml(xml=Builder::XmlMarkup.new)
-      xml.tag!('EncryptedAssertion') {
-        xml.tag!('EncryptedData', encrypted_data)
+      xml.tag!('saml:EncryptedAssertion') {
+        xml.tag!('xenc:EncryptedData', encrypted_data)
         encrypted_keys.each { |key| xml << encrypted_key.to_xml }
       }
     end
@@ -137,7 +137,7 @@ module RSAML #:nodoc:
     # Construct an XML fragment representing the assertion
     def to_xml(xml=Builder::XmlMarkup.new)
       attributes = {'Version' => version, 'ID' => id, 'IssueInstant' => issue_instant.xmlschema}
-      xml.tag!('Assertion', attributes) {
+      xml.tag!('saml:Assertion', attributes) {
         xml << issuer.to_xml
         xml << signature.to_xml unless signature.nil?
         xml << subject.to_xml unless subject.nil?

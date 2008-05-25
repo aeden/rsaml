@@ -16,11 +16,11 @@ class SubjectLocalityTest < Test::Unit::TestCase
     context "when producing xml" do
       should "optionally include an address" do
         @subject_locality.address = '1.2.3.4'
-        assert_equal '<SubjectLocality Address="1.2.3.4"/>', @subject_locality.to_xml
+        assert_equal '<saml:SubjectLocality Address="1.2.3.4"/>', @subject_locality.to_xml
       end
       should "optionally include a dns name" do
         @subject_locality.dns_name = 'example.com'
-        assert_equal '<SubjectLocality DNSName="example.com"/>', @subject_locality.to_xml
+        assert_equal '<saml:SubjectLocality DNSName="example.com"/>', @subject_locality.to_xml
       end
     end
   end

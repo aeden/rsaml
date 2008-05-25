@@ -1,5 +1,8 @@
 module RSAML
   class Action
+    def ns
+      'saml'
+    end
     
     # Identifiers that MAY be used in the namespace attribute of the Action element to refer to 
     # common sets of actions to perform on resources.
@@ -27,7 +30,7 @@ module RSAML
     def to_xml(xml=Builder::XmlMarkup.new)
       attributes = {}
       attributes['Namespace'] = namespace unless namespace.nil?
-      xml.tag!('Action', attributes)
+      xml.tag!('saml:Action', attributes)
     end
   end
 end

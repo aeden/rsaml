@@ -55,29 +55,29 @@ class ConditionsTest < Test::Unit::TestCase
       end
       should "optionally include NotBefore attribute" do
         t = @conditions.not_before = Time.now
-        assert_equal %Q(<Conditions NotBefore="#{t.xmlschema}"></Conditions>), @conditions.to_xml
+        assert_equal %Q(<saml:Conditions NotBefore="#{t.xmlschema}"></saml:Conditions>), @conditions.to_xml
       end
       should "optionally include NotOnOrAfter attribute" do
         t = @conditions.not_on_or_after = Time.now
-        assert_equal %Q(<Conditions NotOnOrAfter="#{t.xmlschema}"></Conditions>), @conditions.to_xml
+        assert_equal %Q(<saml:Conditions NotOnOrAfter="#{t.xmlschema}"></saml:Conditions>), @conditions.to_xml
       end
       should "optionally include conditions" do
         @conditions << Condition.new
-        assert_equal "<Conditions><Condition/></Conditions>", @conditions.to_xml
+        assert_equal "<saml:Conditions><saml:Condition/></saml:Conditions>", @conditions.to_xml
       end
       should "optionally include audience restriction" do
         audience = Audience.new('http://example.org/audience_terms')
         @conditions.audience_restrictions << audience
-        assert_equal "<Conditions><AudienceRestriction><Audience>#{audience.uri}</Audience></AudienceRestriction></Conditions>", @conditions.to_xml
+        assert_equal "<saml:Conditions><saml:AudienceRestriction><saml:Audience>#{audience.uri}</saml:Audience></saml:AudienceRestriction></saml:Conditions>", @conditions.to_xml
       end
       should "optionally include a proxy restriction" do
         proxy_restriction = ProxyRestriction.new
         @conditions.proxy_restriction = proxy_restriction
-        assert_equal "<Conditions><ProxyRestriction></ProxyRestriction></Conditions>", @conditions.to_xml
+        assert_equal "<saml:Conditions><saml:ProxyRestriction></saml:ProxyRestriction></saml:Conditions>", @conditions.to_xml
       end
       should "optionally include a one time use" do
         @conditions.one_time_use = true
-        assert_equal "<Conditions><OneTimeUse/></Conditions>", @conditions.to_xml
+        assert_equal "<saml:Conditions><OneTimeUse/></saml:Conditions>", @conditions.to_xml
       end
     end
   end

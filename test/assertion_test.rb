@@ -65,11 +65,11 @@ class AssertionTest < Test::Unit::TestCase
       # TODO: implement tests for XML results
       should "always include version, id and issue instant attributes and an issuer child element" do
         xml = @assertion.to_xml
-        assert_match(/^<Assertion/, xml)
+        assert_match(/^<saml:Assertion/, xml)
         assert_match(/Version="2.0"/, xml)
         assert_match(/ID="#{uuid_match}"/, xml)
         assert_match(/IssueInstant="#{date_match}"/, xml)
-        assert_match(/<Issuer/, xml)
+        assert_match(/<saml:Issuer/, xml)
       end
       should "optionally include a signature" do
         @assertion.signature = Signature.new
@@ -79,12 +79,12 @@ class AssertionTest < Test::Unit::TestCase
       should "optionally include a subject" do
         @assertion.subject = Subject.new(Identifier::Name.new('The Subject'))
         xml = @assertion.to_xml
-        assert_match(%Q(<Subject><NameID Format="urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified">The Subject</NameID></Subject>), xml)
+        assert_match(%Q(<saml:Subject><saml:NameID Format="urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified">The Subject</saml:NameID></saml:Subject>), xml)
       end
       should "optionally include conditions" do
         @assertion.conditions << Condition.new
         xml = @assertion.to_xml
-        assert_match(/<Conditions>/, xml)
+        assert_match(/<saml:Conditions>/, xml)
       end
       should "optionally include advice" do
         uri = 'http://example.com/some_advice'
@@ -93,13 +93,13 @@ class AssertionTest < Test::Unit::TestCase
         advice.assertions << AssertionURIRef.new(uri) # a URI
         @assertion.advice << advice
         xml = @assertion.to_xml
-        assert_match(/<Advice><AssertionIDRef>#{uuid_match}<\/AssertionIDRef>/, xml)
-        assert_match(/<AssertionURIRef>#{uri}<\/AssertionURIRef><\/Advice>/, xml)
+        assert_match(/<saml:Advice><saml:AssertionIDRef>#{uuid_match}<\/saml:AssertionIDRef>/, xml)
+        assert_match(/<saml:AssertionURIRef>#{uri}<\/saml:AssertionURIRef><\/saml:Advice>/, xml)
       end
       should "optionally include statements" do
         @assertion.statements << AuthenticationStatement.new(AuthenticationContext.new)
         xml = @assertion.to_xml
-        assert_match(/<AuthnStatement AuthnInstant="#{date_match}"/, xml)
+        assert_match(/<saml:AuthnStatement AuthnInstant="#{date_match}"/, xml)
       end
     end
   end

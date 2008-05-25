@@ -18,7 +18,7 @@ class AttributeTest < Test::Unit::TestCase
     end
     context "when producing xml" do
       should "always include a name attribute" do
-        assert_match(/<Attribute Name="email"><\/Attribute>/, @attribute.to_xml)
+        assert_match(/<saml:Attribute Name="email"><\/saml:Attribute>/, @attribute.to_xml)
       end
       should "optionally include a NameFormat attribute" do
         @attribute.name_format = 'http://host/name_format/email'
@@ -30,13 +30,13 @@ class AttributeTest < Test::Unit::TestCase
       end
       should "optionally include a single attribute value child element" do
         @attribute.values << 'someone@somewhere.com'
-        assert_match(/<AttributeValue>someone@somewhere.com<\/AttributeValue>/, @attribute.to_xml)
+        assert_match(/<saml:AttributeValue>someone@somewhere.com<\/saml:AttributeValue>/, @attribute.to_xml)
       end
       should "optionally include multiple attribute value child elements" do
         @attribute.values << 'someone@somewhere.com'
         @attribute.values << 'someone@somewhereelse.com'
-        assert_match(/<AttributeValue>someone@somewhere.com<\/AttributeValue>/, @attribute.to_xml)
-        assert_match(/<AttributeValue>someone@somewhereelse.com<\/AttributeValue>/, @attribute.to_xml)
+        assert_match(/<saml:AttributeValue>someone@somewhere.com<\/saml:AttributeValue>/, @attribute.to_xml)
+        assert_match(/<saml:AttributeValue>someone@somewhereelse.com<\/saml:AttributeValue>/, @attribute.to_xml)
       end
     end
   end

@@ -43,9 +43,9 @@ module RSAML #:nodoc:
       # Construct an XML fragment representing the authorization decision statement
       def to_xml(xml=Builder::XmlMarkup.new)
         attributes = {'Resource' => resource, 'Decision' => decision}
-        xml.tag!('AuthzStatement', attributes) {
+        xml.tag!('saml:AuthzStatement', attributes) {
           actions.each { |action| xml << action.to_xml }
-          evience.each { |e| xml << e.to_xml }
+          evidence.each { |e| xml << e.to_xml }
         }
       end
     end

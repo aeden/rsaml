@@ -13,7 +13,7 @@ module RSAML #:nodoc:
     
     # Construct an XML fragment representing the authentication statement
     def to_xml(xml=Builder::XmlMarkup.new)
-      xml.tag!('Evidence') {
+      xml.tag!('saml:Evidence') {
         assertions.each { |assertion| xml << assertion.to_xml }
       }
     end

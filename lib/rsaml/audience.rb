@@ -9,7 +9,7 @@ module RSAML
     
     # Construct an XML fragment representing the audience
     def to_xml(xml=Builder::XmlMarkup.new)
-      xml.tag!('Audience', uri)
+      xml.tag!('saml:Audience', uri)
     end
   end
 end

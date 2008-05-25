@@ -41,8 +41,8 @@ module RSAML #:nodoc:
       xml_attributes = {'Name' => name}
       xml_attributes['NameFormat'] = name_format unless name_format.nil?
       xml_attributes['FriendlyName'] = friendly_name unless friendly_name.nil?
-      xml.tag!('Attribute', xml_attributes) {
-        values.each { |value| xml.tag!('AttributeValue', value.to_s) }
+      xml.tag!('saml:Attribute', xml_attributes) {
+        values.each { |value| xml.tag!('saml:AttributeValue', value.to_s) }
       }
     end
   end
@@ -56,8 +56,8 @@ module RSAML #:nodoc:
     
     # Construct an XML fragment representing the encrypted attribute
     def to_xml(xml=Builder::XmlMarkup.new)
-      xml.tag!('EncryptedAttribute') {
-        xml.tag!('EncryptedData', encrypted_data)
+      xml.tag!('saml:EncryptedAttribute') {
+        xml.tag!('xenc:EncryptedData', encrypted_data)
         encrypted_keys.each { |key| xml << key.to_xml }
       }
     end

@@ -11,7 +11,7 @@ class SubjectTest < Test::Unit::TestCase
     end
     context "when producing xml" do
       should "should include the identifier" do
-        assert_equal '<Subject><NameID Format="urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified">example</NameID></Subject>', @subject.to_xml
+        assert_equal '<saml:Subject><saml:NameID Format="urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified">example</saml:NameID></saml:Subject>', @subject.to_xml
       end
     end
   end
@@ -23,7 +23,7 @@ class SubjectTest < Test::Unit::TestCase
     
     context "when producing xml" do
       should "optionally include subject confirmations" do
-        assert_equal '<Subject><SubjectConfirmation Method="urn:oasis:names:tc:SAML:2.0:cm:holder-of-key"/></Subject>', @subject.to_xml
+        assert_equal '<saml:Subject><saml:SubjectConfirmation Method="urn:oasis:names:tc:SAML:2.0:cm:holder-of-key"/></saml:Subject>', @subject.to_xml
       end
     end
   end
@@ -37,7 +37,7 @@ class SubjectTest < Test::Unit::TestCase
     
     context "when producing xml" do
       should "include the identifier followed by the subject confirmations" do
-        assert_equal '<Subject><NameID Format="urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified">example</NameID><SubjectConfirmation Method="urn:oasis:names:tc:SAML:2.0:cm:holder-of-key"/></Subject>', @subject.to_xml
+        assert_equal '<saml:Subject><saml:NameID Format="urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified">example</saml:NameID><saml:SubjectConfirmation Method="urn:oasis:names:tc:SAML:2.0:cm:holder-of-key"/></saml:Subject>', @subject.to_xml
       end
     end
   end

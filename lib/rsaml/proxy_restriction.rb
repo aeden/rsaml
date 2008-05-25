@@ -17,7 +17,7 @@ module RSAML #:nodoc:
     def to_xml(xml=Builder::XmlMarkup.new)
       attributes = {}
       attributes['Count'] = count unless count.nil?
-      xml.tag!('ProxyRestriction', attributes) {
+      xml.tag!('saml:ProxyRestriction', attributes) {
         audiences.each { |audience| xml << audience.to_xml }
       }
     end

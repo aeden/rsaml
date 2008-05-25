@@ -47,7 +47,7 @@ module RSAML
         attributes = {'AuthnInstant' => authn_instant.xmlschema}
         attributes['SessionIndex'] = session_index unless session_index.nil?
         attributes['SessionNotOnOrAfter'] = session_not_on_or_after.xmlschema unless session_not_on_or_after.nil?
-        xml.tag!('AuthnStatement', attributes) {
+        xml.tag!('saml:AuthnStatement', attributes) {
           xml << authn_context.to_xml
           xml << subject_locality.to_xml unless subject_locality.nil?
         }
