@@ -2,6 +2,14 @@ module RSAML #:nodoc:
   module Protocol #:nodoc:
     # A SAML request
     class Request < Message
+      # Generate a Response instance with the given status code. The response's in_response_to attribute
+      # will be set to the ID of the request.
+      def respond(status)
+        response = Response.new(status)
+        response.in_response_to = id
+        response
+      end
+      
       # Construct an XML fragment representing the request
       def to_xml(xml=Builder::XmlMarkup.new)
         attributes = {'ID' => id, 'Version' => version, 'IssueInstant' => issue_instant.xmlschema}

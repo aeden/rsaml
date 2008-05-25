@@ -43,6 +43,10 @@ class ResponseTest < Test::Unit::TestCase
         assert_match(/Version="2.0"/, xml)
         assert_match(/IssueInstant="#{date_match}"/, xml)
       end
+      should "optionally include an InResponseTo attribute" do
+        @response.in_response_to = 'some_id'
+        assert_match(/InResponseTo="some_id"/, @response.to_xml)
+      end
       should "optionally include a destination" do
         @response.destination = 'http://somesite/destination'
         assert_match(/Destination="#{@response.destination}"/, @response.to_xml)

@@ -1,9 +1,10 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
 class RequestTest < Test::Unit::TestCase
+  include RSAML::Protocol
   context "a request instance" do
     setup do
-      @request = Protocol::Request.new
+      @request = Request.new
     end
     should "require an id" do
       @request.id = nil
@@ -28,6 +29,11 @@ class RequestTest < Test::Unit::TestCase
       assert_raise ValidationError do
         @request.validate
       end
+    end
+    should "create a response with in_response_to set properly" do
+      response = @request.respond(Status.new(StatusCode::SUCCESS))
+      assert_not_nil response
+      assert_equal @request.id, response.in_response_to
     end
     context "when producing xml" do
       should "include the samlp:Request element" do
