@@ -2,6 +2,6 @@ RSAML is a SAML implementation in Ruby. RSAML currently implements the elements 
 
 Concrete requests:
 
-* RSAML::Protocol::Query::AuthnQuery
-* RSAML::Protocol::Query::AttributeQuery
-* RSAML::Protocol::Query::AuthzQuery
+* RSAML::Protocol::Query::AuthnQuery (Authentication query)
+* RSAML::Protocol::Query::AttributeQuery (Attribute query)
+* RSAML::Protocol::Query::AuthzDecisionQuery (Authorization query)
