@@ -1,4 +1,4 @@
-module RSAML
+module RSAML #:nodoc:
   # Specifies the principal that is the subject of all of the (zero or more) 
   # statements in an assertion.
   class Subject

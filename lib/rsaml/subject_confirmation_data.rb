@@ -1,4 +1,8 @@
-module RSAML
+module RSAML #:nodoc:
+  # specifies additional data that allows the subject to be confirmed or constrains the circumstances under 
+  # which the act of subject confirmation can take place. Subject confirmation takes place when a relying 
+  # party seeks to verify the relationship between an entity presenting the assertion (that is, the attesting 
+  # entity) and the subject of the assertion's claims.
   class SubjectConfirmationData
     # A time instant before which the subject cannot be confirmed. The time value is encoded in UTC.
     attr_accessor :not_before

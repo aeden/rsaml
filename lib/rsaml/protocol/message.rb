@@ -1,6 +1,7 @@
 module RSAML #:nodoc:
   module Protocol #:nodoc:
-    # Base class for messages
+    # Base class for messages. This class should not be instantiated directly, rather the Request and Response
+    # classes should be used.
     class Message
       
       # An identifier for the message. It is of type xs:ID and MUST follow the requirements specified in Section 

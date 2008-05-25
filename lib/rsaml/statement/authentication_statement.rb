@@ -1,5 +1,5 @@
-module RSAML
-  module Statement
+module RSAML #:nodoc:
+  module Statement #:nodoc:
     # The assertion subject was authenticated by a particular means at a particular time.
     class AuthenticationStatement < Base
       # Specifies the time at which the authentication took place. The time value is encoded in UTC

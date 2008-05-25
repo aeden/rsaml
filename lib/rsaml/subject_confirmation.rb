@@ -1,4 +1,4 @@
-module RSAML
+module RSAML #:nodoc:
   # Provides the means for a relying party to verify the correspondence of the subject of the 
   # assertion with the party with whom the relying party is communicating.
   class SubjectConfirmation

@@ -1,5 +1,5 @@
-module RSAML
-  module Statement
+module RSAML #:nodoc:
+  module Statement #:nodoc:
     # The assertion subject is associated with the supplied attributes.
     class AttributeStatement < Base
       # Specifies attributes of the assertion subject.
