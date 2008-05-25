@@ -5,6 +5,17 @@ class AttributeTest < Test::Unit::TestCase
     setup do
       @attribute = Attribute.new('email')
     end
+    should "should be valid" do
+      assert_nothing_raised do
+        @attribute.validate
+      end
+    end
+    should "should not be valid if name is nil" do
+      assert_raise ValidationError do
+        @attribute.name = nil
+        @attribute.validate
+      end
+    end
     context "when producing xml" do
       should "always include a name attribute" do
         assert_match(/<Attribute Name="email"><\/Attribute>/, @attribute.to_xml)

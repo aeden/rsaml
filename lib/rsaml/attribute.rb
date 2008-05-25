@@ -1,4 +1,5 @@
-module RSAML
+module RSAML #:nodoc:
+  # Identifies an attribute by name and optionally includes its value(s).
   class Attribute
     # The name of the attribute.
     attr_accessor :name
@@ -11,16 +12,28 @@ module RSAML
     # be useful in cases in which the actual Name is complex or opaque, such as an OID or a UUID.
     attr_accessor :friendly_name
     
-    def initialize(name)
+    # Initialize the attribute with the given name. Optionally pass an array of values.
+    def initialize(name, *values)
       @name = name
+      @values = values      
     end
     
+    # An array of values for the attribute.
     def values
       @values ||= []
     end
     
+    # Validate the structure of the attribute.
     def validate
       raise ValidationError, "Name is required" unless name
+    end
+    
+    # extension point to allow arbitrary XML attributes to be added to <Attribute> constructs 
+    # without the need for an explicit schema extension. This allows additional fields to be 
+    # added as needed to supply additional parameters to be used, for example, in an attribute 
+    # query.
+    def extra_xml_attributes
+      @extra_xml_attributes ||= {}
     end
     
     # Construct an XML fragment representing the authentication statement

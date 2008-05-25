@@ -39,11 +39,22 @@ class StatementTest < Test::Unit::TestCase
   end
   context "an attribute statement" do
     setup do
-      subject = Subject.new(Name.new('example'))
-      @statement = AttributeStatement.new(subject)
+      @statement = AttributeStatement.new
+      @statement.attributes << Attribute.new('email', 'someone@someplace.com')
+    end
+    should "be valid" do
+      assert_nothing_raised { @statement.validate }
+    end
+    should "not be valid if empty attributes" do
+      assert_raise ValidationError do
+        @statement.attributes.clear
+        @statement.validate
+      end
     end
     context "when producing xml" do
-      
+      should "include at least on attribute" do
+        assert_match(/<AttributeStatement><Attribute Name="email"><AttributeValue>someone@someplace.com<\/AttributeValue><\/Attribute><\/AttributeStatement>/, @statement.to_xml)
+      end
     end
   end
   
