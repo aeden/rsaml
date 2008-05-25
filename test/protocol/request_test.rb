@@ -3,7 +3,7 @@ require File.dirname(__FILE__) + '/../test_helper'
 class RequestTest < Test::Unit::TestCase
   context "a request instance" do
     setup do
-      @request = Protocol::Request.new(UUID.new)
+      @request = Protocol::Request.new
     end
     should "require an id" do
       @request.id = nil

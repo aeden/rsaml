@@ -4,6 +4,7 @@ module RSAML #:nodoc:
   end
 end
 
+require 'rsaml/protocol/message'
 require 'rsaml/protocol/status_code'
 require 'rsaml/protocol/status'
 require 'rsaml/protocol/request'
