@@ -42,6 +42,9 @@ class StatementTest < Test::Unit::TestCase
       subject = Subject.new(Name.new('example'))
       @statement = AttributeStatement.new(subject)
     end
+    context "when producing xml" do
+      
+    end
   end
   
   context "an authorization decision statement" do
