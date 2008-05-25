@@ -1,7 +1,7 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
 class AttributeQueryTest < Test::Unit::TestCase
-  include RSAML::Protocol
+  include RSAML::Protocol::Query
   
   context "an attribute query" do
     setup do

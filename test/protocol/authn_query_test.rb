@@ -1,7 +1,7 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
 class AuthnQueryTest < Test::Unit::TestCase
-  include RSAML::Protocol
+  include RSAML::Protocol::Query
   
   context "an authn query" do
     setup do
