@@ -63,7 +63,7 @@ class StatementTest < Test::Unit::TestCase
       @statement = AuthorizationDecisionStatement.new
       @statement.resource = 'file://some/resource'
       @statement.decision = 'Permit'
-      @statement.actions << Action.new
+      @statement.actions << Action.new('Read')
     end
     should "be valid" do
       assert_nothing_raised { @statement.validate }

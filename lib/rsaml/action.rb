@@ -19,6 +19,11 @@ module RSAML #:nodoc:
     # The action value
     attr_accessor :value
     
+    # Initialize the action with the given value.
+    def initialize(value)
+      @value = value
+    end
+    
     # The action namespace.
     def namespace
       @namespace ||= Action.namespaces[:rwedc_negation]
@@ -26,6 +31,8 @@ module RSAML #:nodoc:
     
     # Validate the structure
     def validate
+      raise ValidationError, "Action value must be specified" if value.nil?
+      raise ValidationError, "Action value not in given namespace" unless namespace.valid_action?(value)
     end
     
     # Construct an XML fragment representing the action

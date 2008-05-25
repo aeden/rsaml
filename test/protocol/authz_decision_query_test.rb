@@ -7,7 +7,7 @@ class AuthzDecisionQueryTest < Test::Unit::TestCase
     setup do
       @query = AuthzDecisionQuery.new(Subject.new('example'))
       @query.resource = 'http://somesite/some/resource'
-      @query.actions << Action.new
+      @query.actions << Action.new('Read')
     end
     should "be valid" do
       assert_nothing_raised { @query.validate }
@@ -20,7 +20,7 @@ class AuthzDecisionQueryTest < Test::Unit::TestCase
         assert_match(%Q(<samlp:AuthzDecisionQuery Resource="#{@query.resource}"), @query.to_xml)
       end
       should "include actions" do
-        
+        assert_match(%Q(<saml:Action Namespace="urn:oasis:names:tc:SAML:1.0:action:rwedc-negation">Read</saml:Action>), @query.to_xml)
       end
     end
   end

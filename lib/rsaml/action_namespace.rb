@@ -30,6 +30,11 @@ module RSAML #:nodoc:
       @action_names = action_names
     end
     
+    # Return true if the given value is a valid action in the namespace.
+    def valid_action?(value)
+      action_names.include?(value)
+    end
+    
     # Return a string representation, specifically the URI for the namespace.
     def to_s
       uri
