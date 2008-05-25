@@ -31,7 +31,8 @@ module RSAML #:nodoc:
     # extension point to allow arbitrary XML attributes to be added to <Attribute> constructs 
     # without the need for an explicit schema extension. This allows additional fields to be 
     # added as needed to supply additional parameters to be used, for example, in an attribute 
-    # query.
+    # query. This attribute is a Hash of name/value pairs that is output directly with the
+    # <Attribute> XML element.
     def extra_xml_attributes
       @extra_xml_attributes ||= {}
     end
@@ -41,7 +42,7 @@ module RSAML #:nodoc:
       xml_attributes = {'Name' => name}
       xml_attributes['NameFormat'] = name_format unless name_format.nil?
       xml_attributes['FriendlyName'] = friendly_name unless friendly_name.nil?
-      xml.tag!('saml:Attribute', xml_attributes) {
+      xml.tag!('saml:Attribute', xml_attributes.merge(extra_xml_attributes)) {
         values.each { |value| xml.tag!('saml:AttributeValue', value.to_s) }
       }
     end

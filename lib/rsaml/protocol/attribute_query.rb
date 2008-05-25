@@ -8,7 +8,8 @@ module RSAML #:nodoc:
       # If a given attribute element contains one or more AttributeValue elements, then if that attribute 
       # is returned in the response, it MUST NOT contain any values that are not equal to the values 
       # specified in the query. In the absence of equality rules specified by particular profiles or 
-      # attributes, equality is defined as an identical XML representation of the value.
+      # attributes, equality is defined as an identical XML representation of the value. Each value in 
+      # the array MUST be an Attribute instance.
       def attributes
         @attributes ||= []
       end

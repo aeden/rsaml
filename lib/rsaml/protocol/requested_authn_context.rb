@@ -1,6 +1,6 @@
 module RSAML #:nodoc:
   module Protocol #:nodoc:
-    # specifies the authentication context requirements of authentication statements returned in 
+    # Specifies the authentication context requirements of authentication statements returned in 
     # response to a request or query.
     class RequestedAuthnContext
       # List of available comparison values
