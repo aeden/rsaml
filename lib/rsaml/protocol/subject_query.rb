@@ -2,7 +2,7 @@ module RSAML #:nodoc:
   module Protocol #:nodoc:
     # Extension point that allows new SAML queries to be defined that specify a single SAML subject.
     # This class should not be instantiated directly.
-    class SubjectQuery
+    class SubjectQuery < Request
       # The subject
       attr_accessor :subject
       
