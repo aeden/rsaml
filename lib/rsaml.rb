@@ -1,3 +1,5 @@
+$KCODE = 'UTF-8'
+
 SAML_NAMESPACES = {
   'saml' => 'urn:oasis:names:tc:SAML:2.0:assertion',
   'samlp' => 'urn:oasis:names:tc:SAML:2.0:protocol',
