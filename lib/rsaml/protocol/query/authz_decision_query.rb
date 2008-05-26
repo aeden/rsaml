@@ -1,3 +1,5 @@
+# Source code for the RSAML::Protocol::Query::AuthzDecisionQuery class.
+
 module RSAML #:nodoc:
   module Protocol #:nodoc:
     module Query #:nodoc:
