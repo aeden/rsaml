@@ -13,7 +13,7 @@ require 'activesupport'
 
 $:.unshift(File.dirname(__FILE__))
 
-require 'rsaml/xml_sig'
+require 'xml_sig'
 
 require 'rsaml/ext/string'
 
