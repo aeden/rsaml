@@ -36,6 +36,21 @@ class AuthnRequestTest < Test::Unit::TestCase
         @request.scoping = scoping
         assert_match '<samlp:Scoping', @request.to_xml
       end
+      should "optionally include force authn" do
+        @request.force_authn = true
+        assert_match '<samlp:AuthnRequest ForceAuthn="true"', @request.to_xml
+      end
+      should "optionally include passive flag" do
+        @request.is_passive = true
+        assert_match '<samlp:AuthnRequest IsPassive="true"', @request.to_xml
+      end
+      should "optionally include AssertionConsumerServiceURL" do
+        
+      end
+      should "optionally include a provider name" do
+        @request.provider_name = 'example'
+        assert_match '<samlp:AuthnRequest ProviderName="example"', @request.to_xml
+      end
     end
   end
 end

@@ -35,6 +35,32 @@ module RSAML #:nodoc:
       # responder.
       attr_accessor :scoping
       
+      # A Boolean value. If "true", the identity provider MUST authenticate the presenter directly rather than 
+      # rely on a previous security context. If a value is not provided, the default is "false". However, if both 
+      # ForceAuthn and IsPassive are "true", the identity provider MUST NOT freshly authenticate the 
+      # presenter unless the constraints of IsPassive can be met.
+      attr_accessor :force_authn
+      
+      # A Boolean value. If "true", the identity provider and the user agent itself MUST NOT visibly take control 
+      # of the user interface from the requester and interact with the presenter in a noticeable fashion. If a 
+      # value is not provided, the default is "false".
+      attr_accessor :is_passive
+      
+      attr_accessor :assertion_consumer_service_index
+      
+      attr_accessor :assertion_consumer_service_url
+      
+      # A URI reference that identifies a SAML protocol binding to be used when returning the response message.
+      attr_accessor :protocol_binding
+      
+      # Indirectly identifies information associated with the requester describing the SAML attributes the 
+      # requester desires or requires to be supplied by the identity provider in the <Response> message. The 
+      # identity provider MUST have a trusted means to map the index value in the attribute to information 
+      # associated with the requester.
+      attr_accessor :attribute_consuming_service_url
+      
+      attr_accessor :provider_name
+      
       # Validate the authentication request.
       def validate
         raise ValidationError, "Conditions must be of type Conditions" if conditions && !conditions.is_a?(Conditions)
@@ -42,7 +68,15 @@ module RSAML #:nodoc:
       
       # Construct an XML fragment representing the authentication request
       def to_xml(xml=Builder::XmlMarkup.new)
-        xml.tag!('samlp:AuthnRequest') {
+        attributes = {}
+        attributes['ForceAuthn'] = force_authn unless force_authn.nil?
+        attributes['IsPassive'] = is_passive unless is_passive.nil?
+        # TODO implement assertion consumer service index
+        # TODO implement assertion consumer service URL
+        attributes['ProtocolBinding'] = protocol_binding unless protocol_binding.nil?
+        attributes['AttributeConsumingServiceURL'] = attribute_consuming_service_url unless attribute_consuming_service_url.nil?
+        attributes['ProviderName'] = provider_name unless provider_name.nil?
+        xml.tag!('samlp:AuthnRequest', attributes) {
           xml << subject.to_xml unless subject.nil?
           xml << name_id_policy.to_xml unless name_id_policy.nil?
           xml << conditions.to_xml unless conditions.nil?
