@@ -10,6 +10,12 @@ require 'rsaml/protocol/status'
 require 'rsaml/protocol/request'
 require 'rsaml/protocol/response'
 
+require 'rsaml/protocol/name_id_policy'
+require 'rsaml/protocol/scoping'
+require 'rsaml/protocol/idp_list'
+require 'rsaml/protocol/idp_entry'
+
 require 'rsaml/protocol/assertion_id_request'
+require 'rsaml/protocol/authn_request'
 
 require 'rsaml/protocol/query'
