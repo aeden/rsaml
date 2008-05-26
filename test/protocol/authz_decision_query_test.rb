@@ -22,6 +22,10 @@ class AuthzDecisionQueryTest < Test::Unit::TestCase
       should "include actions" do
         assert_match(%Q(<saml:Action Namespace="urn:oasis:names:tc:SAML:1.0:action:rwedc-negation">Read</saml:Action>), @query.to_xml)
       end
+      should "optionally include evidence" do
+        @query.evidence = Evidence.new
+        assert_match(%Q(<saml:Evidence></saml:Evidence>), @query.to_xml)
+      end
     end
   end
 end

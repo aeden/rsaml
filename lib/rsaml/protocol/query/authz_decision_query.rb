@@ -14,9 +14,7 @@ module RSAML #:nodoc:
         end
         
         # A set of assertions that the SAML authority MAY rely on in making its authorization decision.
-        def evidence
-          @evidence ||= []
-        end
+        attr_accessor :evidence
         
         # Validate the query structure.
         def validate
@@ -31,7 +29,7 @@ module RSAML #:nodoc:
           xml.tag!('samlp:AuthzDecisionQuery', attributes) {
             xml << subject.to_xml unless subject.nil?
             actions.each { |action| xml << action.to_xml }
-            evidence.each { |evidence| xml << evidence.to_xml }
+            xml << evidence.to_xml unless evidence.nil?
           }
         end
       end

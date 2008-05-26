@@ -14,7 +14,7 @@ module RSAML #:nodoc:
         :ghpp => ActionNamespace.new('urn:oasis:names:tc:SAML:1.0:action:ghpp', [
           'Get','Head','Put','Post'
         ]),
-        :unix => ActionNamespace.new('urn:oasis:names:tc:SAML:1.0:action:unix', []) #TODO implement action names
+        :unix => UnixActionNamespace.new
       }
     end
 
@@ -38,6 +38,20 @@ module RSAML #:nodoc:
     # Return a string representation, specifically the URI for the namespace.
     def to_s
       uri
+    end
+  end
+  
+  # Unix Action namespace implementation
+  class UnixActionNamespace < ActionNamespace
+    # Initialize
+    def initialize
+      super('urn:oasis:names:tc:SAML:1.0:action:unix', [])
+    end
+    
+    # Return true if the given value is a valid action
+    def valid_action?(value)
+      # TODO: implement octal check
+      false
     end
   end
 end
