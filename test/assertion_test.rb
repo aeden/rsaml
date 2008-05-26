@@ -72,7 +72,7 @@ class AssertionTest < Test::Unit::TestCase
         assert_match(/<saml:Issuer/, xml)
       end
       should "optionally include a signature" do
-        @assertion.signature = Signature.new
+        @assertion.signature = XmlSig::Signature.new
         xml = @assertion.to_xml
         assert_match(/<ds:Signature/, xml)
       end

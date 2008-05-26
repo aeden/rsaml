@@ -58,7 +58,7 @@ class RequestTest < Test::Unit::TestCase
         assert_match(%Q(<saml:Issuer Format="urn:oasis:names:tc:SAML:2.0:nameid-format:entity">example</saml:Issuer>), @request.to_xml)
       end
       should "optionally include a signature" do
-        @request.signature = Signature.new()
+        @request.signature = XmlSig::Signature.new()
         assert_match(%Q(<ds:Signature), @request.to_xml)
       end
     end

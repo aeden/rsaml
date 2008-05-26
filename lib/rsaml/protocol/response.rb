@@ -18,6 +18,16 @@ module RSAML #:nodoc:
         @status = status
       end
       
+      # SAML assertions
+      def assertions
+        @assertions ||= []
+      end
+      
+      # SAML encrypted assertions
+      def encrypted_assertions
+        @encrypted_assertions ||= []
+      end
+      
       # Validate the request structure
       def validate
         super
@@ -37,6 +47,8 @@ module RSAML #:nodoc:
           xml << signature.to_xml unless signature.nil?
           # TODO: add extensions support
           xml << status.to_xml unless status.nil?
+          assertions.each { |assertion| xml << assertion.to_xml }
+          encrypted_assertions.each { |encrypted_assertion| xml << encrypted_assertion.to_xml }
         }
       end
     end

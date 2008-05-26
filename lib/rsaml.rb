@@ -13,6 +13,8 @@ require 'activesupport'
 
 $:.unshift(File.dirname(__FILE__))
 
+require 'rsaml/xml_sig'
+
 require 'rsaml/ext/string'
 
 require 'rsaml/encrypted'
@@ -31,7 +33,6 @@ require 'rsaml/conditions'
 require 'rsaml/evidence'
 require 'rsaml/identifier'
 require 'rsaml/proxy_restriction'
-require 'rsaml/signature'
 require 'rsaml/statement'
 require 'rsaml/subject'
 require 'rsaml/subject_confirmation'
