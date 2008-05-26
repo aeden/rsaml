@@ -17,7 +17,7 @@ module RSAML
 
       def validate
         raise ValidationError, "Digest method is required" if digest_method.nil?
-        raise ValidationError, "Digest value is required" if digest_method.nil?
+        raise ValidationError, "Digest value is required" if digest_value.nil?
       end
 
       def to_xml(xml=Builder::XmlMarkup.new)
@@ -26,14 +26,24 @@ module RSAML
         attributes['URI'] = uri unless uri.nil?
         attributes['Type'] = type unless type.nil?
         xml.tag!('ds:Reference', attributes) {
-          transforms.each { |transform| xml << transform.to_xml }
+          xml.tag!('ds:Transforms') {
+            transforms.each { |transform| xml << transform.to_xml }
+          }
           xml << digest_method.to_xml unless digest_method.nil?
           xml.tag!('ds:DigestValue', digest_value)
         }
       end
     end
-    
+
+    # DigestMethod is a required element that identifies the digest algorithm to be applied 
+    # to the signed object.
     class DigestMethod
+      def self.identifiers
+        @identifiers ||= {
+          'SHA-1', 'http://www.w3.org/2000/09/xmldsig#sha1'
+        }
+      end
+      
       attr_accessor :algorithm
 
       def validate
@@ -42,21 +52,7 @@ module RSAML
 
       def to_xml(xml=Builder::XmlMarkup.new)
         attributes = {'Algorightm' => algorithm}
-        xml.tag!('ds:DigestMethod', attributes) {
-
-        }
-      end
-    end
-    
-    class Transform
-      attr_accessor :algorithm
-      attr_accessor :xpath
-
-      def to_xml(xml=Builder::XmlMarkup.new)
-        attributes = {'Algorightm' => algorithm}
-        xml.tag!('ds:Transform', attributes) {
-          xml.tag!('ds:XPath', xpath) unless xpath.nil?
-        }
+        xml.tag!('ds:DigestMethod', attributes)
       end
     end
     

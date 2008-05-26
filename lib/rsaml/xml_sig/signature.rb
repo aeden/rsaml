@@ -27,33 +27,5 @@ module RSAML #:nodoc:
         }
       end
     end
-    
-    class CanonicalizationMethod
-      attr_accessor :algorithm
-
-      def validate
-        raise ValidationError, "Algorithm is required" if algorithm.nil?
-      end
-
-      def to_xml(xml=Builder::XmlMarkup.new)
-        attributes = {'Algorightm' => algorithm}
-        xml.tag!('ds:CanonicalizationMethod', attributes)
-      end
-    end
-
-    class SignatureMethod
-      attr_accessor :algorithm
-
-      def validate
-        raise ValidationError, "Algorithm is required" if algorithm.nil?
-      end
-
-      def to_xml(xml=Builder::XmlMarkup.new)
-        attributes = {'Algorightm' => algorithm}
-        xml.tag!('ds:SignatureMethod', attributes) {
-          xml.tag!('ds:HMACOutputLength', hmac_output_length) unless hmac_output_length.nil?
-        }
-      end
-    end
   end
 end
