@@ -14,5 +14,12 @@ class AdviceTest < Test::Unit::TestCase
         assert_match(/<saml:Advice><\/saml:Advice>/, @advice.to_xml)
       end
     end
+    context "when consuming xml" do
+      should "return a valid Advice instance" do
+        advice = Advice.from_xml('<saml:Advice></saml:Advice>')
+        assert_not_nil(advice)
+        assert advice.valid?
+      end
+    end
   end
 end

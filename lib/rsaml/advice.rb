@@ -20,5 +20,15 @@ module RSAML #:nodoc:
         assertions.each { |assertion| xml << assertion.to_xml }
       }
     end
+    
+    # Construct an Advice instance from the given XML Element or fragment
+    def self.from_xml(element)
+      element = REXML::Document.new(element).root if element.is_a?(String)
+      advice = Advice.new
+      element.get_elements('saml:Assertion').each do |assertion_element|
+        advice.assertions << Assertion.from_xml(assertion_element)
+      end
+      advice
+    end
   end
 end

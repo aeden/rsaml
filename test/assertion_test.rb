@@ -123,6 +123,14 @@ class AssertionTest < Test::Unit::TestCase
         assert_match(/<saml:AssertionURIRef>some_uri<\/saml:AssertionURIRef>/, @assertion_uri_ref.to_xml)
       end
     end
+    context "when consuming xml" do
+      should "return a valid AssertionURIRef instance" do
+        assertion_ref = AssertionURIRef.from_xml('<saml:AssertionURIRef>some_uri</saml:AssertionURIRef>')
+        assert_not_nil assertion_ref
+        assert_equal 'some_uri', assertion_ref.uri
+        assert assertion_ref.valid?
+      end
+    end
   end
   context "an assertion ID ref" do
     setup do
@@ -139,6 +147,14 @@ class AssertionTest < Test::Unit::TestCase
     context "when producing xml" do
       should "have an id as the value" do
         assert_match(/<saml:AssertionIDRef>some_id<\/saml:AssertionIDRef>/, @assertion_id_ref.to_xml)
+      end
+    end
+    context "when consuming xml" do
+      should "return a valid AssertionIDRef instance" do
+        assertion_ref = AssertionIDRef.from_xml('<saml:AssertionIDRef>some_id</saml:AssertionIDRef>')
+        assert_not_nil assertion_ref
+        assert_equal 'some_id', assertion_ref.id
+        assert assertion_ref.valid?
       end
     end
   end

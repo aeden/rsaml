@@ -37,13 +37,14 @@ module RSAML #:nodoc:
       raise ValidationError, "Action value not in given namespace" unless namespace.valid_action?(value)
     end
     
-    # Construct an XML fragment representing the action
+    # Construct an XML fragment representing the action.
     def to_xml(xml=Builder::XmlMarkup.new)
       attributes = {}
       attributes['Namespace'] = namespace unless namespace.nil?
       xml.tag!('saml:Action', attributes, value)
     end
     
+    # Construct an Action instance from the given XML Element or fragment.
     def self.from_xml(element)
       element = REXML::Document.new(element).root if element.is_a?(String)
       action = Action.new(element.text)

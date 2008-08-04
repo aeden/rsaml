@@ -20,6 +20,12 @@ module RSAML #:nodoc:
     def to_xml(xml=Builder::XmlMarkup.new)
       xml.tag!('saml:AssertionURIRef', uri)
     end
+    
+    # Construct an Action instance from the given XML Element or fragment.
+    def self.from_xml(element)
+      element = REXML::Document.new(element).root if element.is_a?(String)
+      AssertionURIRef.new(element.text)
+    end
   end
   
   # Reference to an assertion via ID
@@ -42,6 +48,12 @@ module RSAML #:nodoc:
     # Construct an XML fragment representing the assertion ID ref
     def to_xml(xml=Builder::XmlMarkup.new)
       xml.tag!('saml:AssertionIDRef', id)
+    end
+    
+    # Construct an Action instance from the given XML Element or fragment.
+    def self.from_xml(element)
+      element = REXML::Document.new(element).root if element.is_a?(String)
+      AssertionIDRef.new(element.text)
     end
   end
   

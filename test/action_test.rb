@@ -16,17 +16,21 @@ class ActionTest < Test::Unit::TestCase
         assert_match(/<saml:Action Namespace="#{@action.namespace}"/, @action.to_xml)
       end
     end
-    context "when parsing a valid xml fragment" do
-      should "return an Action instance" do
+    context "when consuming xml" do
+      should "return a valid Action instance" do
         action = Action.from_xml('<saml:Action>Read</saml:Action>')
         assert_not_nil(action)
         assert_equal 'Read', action.value
         assert_equal Action.namespaces[:rwedc_negation], action.namespace
-        
-        action = Action.from_xml(%Q(<saml:Action Namespace="#{Action.namespaces[:rwedc]}">Write</saml:Action>))
-        assert_not_nil(action)
-        assert_equal 'Write', action.value
-        assert_equal Action.namespaces[:rwedc], action.namespace
+        assert action.valid?
+      end
+      context "with an action namespace attribute" do
+        should "return a valid Action instance with an action namespace" do
+          action = Action.from_xml(%Q(<saml:Action Namespace="#{Action.namespaces[:rwedc]}">Write</saml:Action>))
+          assert_not_nil(action)
+          assert_equal 'Write', action.value
+          assert_equal Action.namespaces[:rwedc], action.namespace
+        end
       end
     end
     context "when validating" do

@@ -20,6 +20,7 @@ require 'activesupport'
 $:.unshift(File.dirname(__FILE__))
 
 require 'xml_sig'
+require 'xml_enc'
 
 require 'rsaml/ext/string'
 
