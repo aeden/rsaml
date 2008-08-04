@@ -18,6 +18,8 @@ module RSAML #:nodoc:
       }
     end
     
+    # Get an ActionNamespace instance for the given namespace URI. This method will
+    # return nil if no namespace is found for the given URI
     def self.namespace_for_uri(uri)
       namespaces.values.find { |ns| ns.uri == uri }
     end

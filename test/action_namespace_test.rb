@@ -9,6 +9,14 @@ class ActionNamespaceTest < Test::Unit::TestCase
       assert namespace_uris.include?('urn:oasis:names:tc:SAML:1.0:action:ghpp')
       assert namespace_uris.include?('urn:oasis:names:tc:SAML:1.0:action:unix')
     end
+    should "return a namespace instance given a URI" do
+      assert_equal(ActionNamespace.namespaces[:rwedc], 
+        ActionNamespace.namespace_for_uri('urn:oasis:names:tc:SAML:1.0:action:rwedc')
+      )
+      assert_equal(ActionNamespace.namespaces[:rwedc_negation], 
+        ActionNamespace.namespace_for_uri('urn:oasis:names:tc:SAML:1.0:action:rwedc-negation')
+      )
+    end
   end
   context "the rwdec namespace" do
     setup do
