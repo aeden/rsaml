@@ -1,12 +1,19 @@
 module RSAML #:nodoc:
   # Reference to an assertion via URI
   class AssertionURIRef
+    include Validatable
+    
     # The URI reference
     attr_accessor :uri
     
     # Initialize the AssertionURIRef with the given URI
     def initialize(uri)
       @uri = uri
+    end
+    
+    # Validate that the AssertionURIRef is structurally valid
+    def validate
+      raise ValidationError, "A URI is required" if uri.nil?
     end
     
     # Construct an XML fragment representing the assertion uri ref
@@ -17,12 +24,19 @@ module RSAML #:nodoc:
   
   # Reference to an assertion via ID
   class AssertionIDRef
+    include Validatable
+    
     # The ID reference
     attr_accessor :id
     
     # Initialize the AssertionIDRef with the given assertion ID
     def initialize(id)
       @id = id
+    end
+    
+    # Validate that the AssertionIDRef is structurally valid
+    def validate
+      raise ValidationError, "An id is required" if id.nil?
     end
     
     # Construct an XML fragment representing the assertion ID ref

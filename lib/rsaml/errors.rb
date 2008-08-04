@@ -10,4 +10,7 @@ module RSAML #:nodoc:
   # An error that is raised when a confirmation fails.
   class ConfirmationError < StandardError
   end
+  # An error that is raised when parsing fails.
+  class ParseError < StandardError
+  end
 end

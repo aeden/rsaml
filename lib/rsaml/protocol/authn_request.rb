@@ -59,6 +59,8 @@ module RSAML #:nodoc:
       # associated with the requester.
       attr_accessor :attribute_consuming_service_url
       
+      # Specifies the human-readable name of the requester for use by the presenter's user agent or the 
+      # identity provider
       attr_accessor :provider_name
       
       # Validate the authentication request.

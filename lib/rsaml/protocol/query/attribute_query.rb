@@ -36,7 +36,19 @@ module RSAML #:nodoc:
           xml_attributes = {}
           xml.tag!('samlp:AttributeQuery', xml_attributes) {
             xml << subject.to_xml unless subject.nil?
+            attributes.each { |attribute| xml << attribute.to_xml }
           }
+        end
+        
+        # Construct an AttributeQuery instance from the XML Element.
+        def self.from_xml(element)
+          element = REXML::Document.new(element).root if element.is_a?(String)
+          subject = Subject.from_xml(element.get_elements('saml:Subject').first)
+          attribute_query = AttributeQuery.new(subject)
+          element.get_elements('saml:Attribute').each do |attribute_element|
+            attribute_query.attributes << Attribute.from_xml(attribute_element)
+          end
+          attribute_query
         end
       end
     end

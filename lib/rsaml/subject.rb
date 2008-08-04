@@ -25,5 +25,13 @@ module RSAML #:nodoc:
         xml << subject_confirmations.map { |sc| sc.to_xml }.join
       }
     end
+    
+    # Construct a Subject from an XML Element.
+    def self.from_xml(element)
+      element = REXML::Document.new(element).root if element.is_a?(String)      
+      element.get_elements('saml:NameID').each do |identifier|
+        return Subject.new(Identifier::Name.from_xml(identifier))
+      end
+    end
   end
 end

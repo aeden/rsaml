@@ -8,9 +8,25 @@ class ActionTest < Test::Unit::TestCase
     should "have the rwedc_negation namespace by default" do
       assert_equal Action.namespaces[:rwedc_negation], @action.namespace
     end
+    should "be valid by default" do
+      assert @action.valid?
+    end
     context "when producing xml" do
       should "optionally have a namespace" do
         assert_match(/<saml:Action Namespace="#{@action.namespace}"/, @action.to_xml)
+      end
+    end
+    context "when parsing a valid xml fragment" do
+      should "return an Action instance" do
+        action = Action.from_xml('<saml:Action>Read</saml:Action>')
+        assert_not_nil(action)
+        assert_equal 'Read', action.value
+        assert_equal Action.namespaces[:rwedc_negation], action.namespace
+        
+        action = Action.from_xml(%Q(<saml:Action Namespace="#{Action.namespaces[:rwedc]}">Write</saml:Action>))
+        assert_not_nil(action)
+        assert_equal 'Write', action.value
+        assert_equal Action.namespaces[:rwedc], action.namespace
       end
     end
     context "when validating" do

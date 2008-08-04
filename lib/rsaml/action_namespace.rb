@@ -17,6 +17,10 @@ module RSAML #:nodoc:
         :unix => UnixActionNamespace.new
       }
     end
+    
+    def self.namespace_for_uri(uri)
+      namespaces.values.find { |ns| ns.uri == uri }
+    end
 
     # URI identifying this action namespace
     attr_accessor :uri

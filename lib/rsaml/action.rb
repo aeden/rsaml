@@ -2,6 +2,8 @@ module RSAML #:nodoc:
   # Specifies an action on the specified resource for which permission is sought. Its value provides the 
   # label for an action sought to be performed on the specified resource.
   class Action
+    include Validatable
+    
     # Identifiers that MAY be used in the namespace attribute of the Action element to refer to 
     # common sets of actions to perform on resources.
     #
@@ -40,6 +42,15 @@ module RSAML #:nodoc:
       attributes = {}
       attributes['Namespace'] = namespace unless namespace.nil?
       xml.tag!('saml:Action', attributes, value)
+    end
+    
+    def self.from_xml(element)
+      element = REXML::Document.new(element).root if element.is_a?(String)
+      action = Action.new(element.text)
+      if (namespace_attribute = element.attribute('Namespace'))
+        action.namespace = ActionNamespace.namespace_for_uri(namespace_attribute.value)
+      end
+      action
     end
   end
 end

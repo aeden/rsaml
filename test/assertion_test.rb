@@ -103,4 +103,43 @@ class AssertionTest < Test::Unit::TestCase
       end
     end
   end
+  context "an assertion URI ref" do
+    setup do
+      @assertion_uri_ref = AssertionURIRef.new('some_uri')
+    end
+    should "provide a uri accessor" do
+      assert_equal 'some_uri', @assertion_uri_ref.uri
+    end
+    context "when validating" do
+      should "raise an error if no uri is provided" do
+        assert_raise ValidationError do
+          @assertion_uri_ref.uri = nil
+          @assertion_uri_ref.validate
+        end
+      end
+    end
+    context "when producing xml" do
+      should "have the uri as the value" do
+        assert_match(/<saml:AssertionURIRef>some_uri<\/saml:AssertionURIRef>/, @assertion_uri_ref.to_xml)
+      end
+    end
+  end
+  context "an assertion ID ref" do
+    setup do
+      @assertion_id_ref = AssertionIDRef.new('some_id')
+    end
+    context "when validating" do
+      should "raise an error if no id is provided" do
+        assert_raise ValidationError do
+          @assertion_id_ref.id = nil
+          @assertion_id_ref.validate
+        end
+      end
+    end
+    context "when producing xml" do
+      should "have an id as the value" do
+        assert_match(/<saml:AssertionIDRef>some_id<\/saml:AssertionIDRef>/, @assertion_id_ref.to_xml)
+      end
+    end
+  end
 end

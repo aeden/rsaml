@@ -46,6 +46,15 @@ module RSAML #:nodoc:
         values.each { |value| xml.tag!('saml:AttributeValue', value.to_s) }
       }
     end
+    
+    def self.from_xml(element)
+      element = REXML::Document.new(element).root if element.is_a?(String)
+      attribute = Attribute.new(element.attribute('Name').value)
+      if element.attribute('NameFormat')
+        attribute.name_format = element.attribute('NameFormat').value
+      end
+      attribute
+    end
   end
   
   # An encrypted attribute.
