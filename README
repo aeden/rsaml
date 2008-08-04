@@ -1,3 +1,5 @@
+== About
+
 RSAML is a SAML implementation in Ruby. RSAML currently implements the elements defined in the SAML-Core 2.0 specification by defining an object model that mimics the structure of SAML. Method names and attributes have been made ruby-friendly and documentation is provided for each class and method. In certain cases the SAML specification is referenced directly and should be considered the final say whenever a question arises regarding SAML implementation.
 
 Concrete requests:
@@ -5,3 +7,7 @@ Concrete requests:
 * RSAML::Protocol::Query::AuthnQuery (Authentication query)
 * RSAML::Protocol::Query::AttributeQuery (Attribute query)
 * RSAML::Protocol::Query::AuthzDecisionQuery (Authorization query)
+
+== A note on the implementation
+
+RSAML is implemented in a very verbose fashion. While there are probably ways to reduce the code footprint using meta programming and other Rubyisms, I've attempted to stick to an implementation style that is easy to follow for non-rubyists and rubyists alike. Additionally I am striving for a comprehensive test suite that can be used to verify conformance to the SAML 2.0 specification.

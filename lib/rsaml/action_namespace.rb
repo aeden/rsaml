@@ -12,7 +12,7 @@ module RSAML #:nodoc:
           'Read','Write','Execute','Delete','Control','~Read','~Write','~Execute','~Delete','~Control'
         ]),
         :ghpp => ActionNamespace.new('urn:oasis:names:tc:SAML:1.0:action:ghpp', [
-          'Get','Head','Put','Post'
+          'GET','HEAD','PUT','POST'
         ]),
         :unix => UnixActionNamespace.new
       }

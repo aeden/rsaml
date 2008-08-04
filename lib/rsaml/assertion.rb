@@ -45,6 +45,8 @@ module RSAML #:nodoc:
   # An assertion is a package of information that supplies zero or more statements made by a SAML 
   # authority.
   class Assertion
+    include Validatable
+    
     # SAML assertions are usually made about a subject, however the subject is optional
     attr_accessor :subject
     
@@ -107,11 +109,6 @@ module RSAML #:nodoc:
         assertion_cache << self unless conditions.cache?
         conditions.assert
       end
-    end
-    
-    # Return true if the assertion is structurally valid
-    def valid?
-      Validator.valid?(self)
     end
     
     # Validate the assertion. This validates the structural integrity of the assertion, not the

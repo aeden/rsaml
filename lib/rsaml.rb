@@ -20,7 +20,7 @@ require 'xml_sig'
 require 'rsaml/ext/string'
 
 require 'rsaml/encrypted'
-require 'rsaml/validator'
+require 'rsaml/validatable'
 require 'rsaml/errors'
 
 require 'rsaml/action'
