@@ -102,6 +102,37 @@ class AssertionTest < Test::Unit::TestCase
         assert_match(/<saml:AuthnStatement AuthnInstant="#{date_match}"/, xml)
       end
     end
+
+    context "when consuming xml" do
+      should "return a valid Assertion instance" do
+        xml_fragment = %Q(
+          <saml:Assertion>
+            <saml:Issuer>Example</saml:Issuer>
+            <saml:Subject>Anthony</saml:Subject>
+          </saml:Assertion>
+        )
+        assertion = Assertion.from_xml(xml_fragment)
+        assert_not_nil assertion
+        assert_not_nil assertion.issuer
+        assert_equal 'Example', assertion.issuer.value
+        assert_nothing_raised do
+          assertion.validate
+        end
+      end
+      context "where there is no saml:Subject element" do
+        should "raise a validation error" do
+          xml_fragment = %Q(
+            <saml:Assertion>
+              <saml:Issuer>Example</saml:Issuer>
+            </saml:Assertion>
+          )
+          assertion = Assertion.from_xml(xml_fragment)
+          assert_raise ValidationError do
+            assertion.validate
+          end
+        end
+      end
+    end
   end
   context "an assertion URI ref" do
     setup do

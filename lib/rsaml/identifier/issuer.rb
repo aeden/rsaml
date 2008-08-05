@@ -17,6 +17,12 @@ module RSAML #:nodoc:
         attributes['SPProvidedID'] = sp_provided_id unless sp_provided_id.nil?
         xml.tag!('saml:Issuer', value, attributes)
       end
+      
+      # Construct an Issuer instance from the given XML Element or fragment.
+      def self.from_xml(element)
+        element = REXML::Document.new(element).root if element.is_a?(String)
+        Issuer.new(element.text)
+      end
     end
   end
 end

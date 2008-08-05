@@ -95,9 +95,8 @@ module RSAML #:nodoc:
     # The subject of the statement(s) in the assertion.
     attr_accessor :subject
     
-    # Conditions that MUST be evaluated when assessing the validity of and/or when using the assertion.
-    #
-    # conditions should contain a single Conditions object
+    # Conditions that MUST be evaluated when assessing the validity of and/or when using the assertion. 
+    # Note: conditions should contain a single Conditions instance, not an array of Condition instances.
     attr_accessor :conditions
     
     # Construct a new assertion from the given issuer
@@ -168,6 +167,17 @@ module RSAML #:nodoc:
         advice.each { |a| xml << a.to_xml }
         statements.each { |s| xml << s.to_xml }
       }
+    end
+    
+    # Construct an Action instance from the given XML Element or fragment.
+    def self.from_xml(element)
+      element = REXML::Document.new(element).root if element.is_a?(String)
+      issuer = Identifier::Issuer.from_xml(element.get_elements('saml:Issuer').first)
+      assertion = Assertion.new(issuer)
+      if (subject = element.get_elements('saml:Subject').first)
+        assertion.subject = Subject.from_xml(subject)
+      end
+      assertion
     end
     
     protected
