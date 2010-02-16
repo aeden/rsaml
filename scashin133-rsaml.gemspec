@@ -89,6 +89,7 @@ Gem::Specification.new do |s|
      "lib/xml_sig/signature_method.rb",
      "lib/xml_sig/signed_info.rb",
      "lib/xml_sig/transform.rb",
+     "scashin133-rsaml.gemspec",
      "test/action_namespace_test.rb",
      "test/action_test.rb",
      "test/advice_test.rb",
