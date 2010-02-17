@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{scashin133-rsaml}
-  s.version = "0.1.0"
+  s.version = "0.1.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Anthony Eden"]
-  s.date = %q{2010-02-12}
+  s.date = %q{2010-02-16}
   s.description = %q{RSAML is a SAML implementation in Ruby. RSAML currently implements the elements defined in the SAML-Core 2.0 
     specification by defining an object model that mimics the structure of SAML. Method names and attributes have been made 
     ruby-friendly and documentation is provided for each class and method. In certain cases the SAML specification is 
@@ -21,10 +21,7 @@ Gem::Specification.new do |s|
      "README"
   ]
   s.files = [
-    ".autotest",
-     ".gitignore",
-     "LICENSE",
-     "README",
+    "README",
      "Rakefile",
      "lib/rsaml.rb",
      "lib/rsaml/action.rb",
@@ -88,40 +85,7 @@ Gem::Specification.new do |s|
      "lib/xml_sig/signature.rb",
      "lib/xml_sig/signature_method.rb",
      "lib/xml_sig/signed_info.rb",
-     "lib/xml_sig/transform.rb",
-     "scashin133-rsaml.gemspec",
-     "test/action_namespace_test.rb",
-     "test/action_test.rb",
-     "test/advice_test.rb",
-     "test/assertion_test.rb",
-     "test/attribute_test.rb",
-     "test/authentication_context_test.rb",
-     "test/conditions_test.rb",
-     "test/evidence_test.rb",
-     "test/identifier_test.rb",
-     "test/issuer_test.rb",
-     "test/name_test.rb",
-     "test/parser_test.rb",
-     "test/protocol/assertion_id_request_test.rb",
-     "test/protocol/attribute_query_test.rb",
-     "test/protocol/authn_query_test.rb",
-     "test/protocol/authn_request_test.rb",
-     "test/protocol/authz_decision_query_test.rb",
-     "test/protocol/idp_list_test.rb",
-     "test/protocol/request_test.rb",
-     "test/protocol/response_test.rb",
-     "test/protocol/scoping_test.rb",
-     "test/protocol/status_code_test.rb",
-     "test/protocol/status_test.rb",
-     "test/proxy_restriction_test.rb",
-     "test/rsaml_test.rb",
-     "test/sample_data/attribute_query.xml",
-     "test/statement_test.rb",
-     "test/subject_locality_test.rb",
-     "test/subject_test.rb",
-     "test/test_helper.rb",
-     "test/xml_sig/canonicalization_test.rb",
-     "test/xml_sig/iso-8859-1.txt"
+     "lib/xml_sig/transform.rb"
   ]
   s.homepage = %q{http://github.com/scashin133/rsaml}
   s.rdoc_options = ["--charset=UTF-8"]
