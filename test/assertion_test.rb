@@ -106,7 +106,7 @@ class AssertionTest < Test::Unit::TestCase
     context "when consuming xml" do
       should "return a valid Assertion instance" do
         xml_fragment = %Q(
-          <saml:Assertion>
+          <saml:Assertion xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion">
             <saml:Issuer>Example</saml:Issuer>
             <saml:Subject>Anthony</saml:Subject>
           </saml:Assertion>
@@ -122,7 +122,7 @@ class AssertionTest < Test::Unit::TestCase
       context "where there is no saml:Subject element" do
         should "raise a validation error" do
           xml_fragment = %Q(
-            <saml:Assertion>
+            <saml:Assertion xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion">
               <saml:Issuer>Example</saml:Issuer>
             </saml:Assertion>
           )
@@ -156,7 +156,7 @@ class AssertionTest < Test::Unit::TestCase
     end
     context "when consuming xml" do
       should "return a valid AssertionURIRef instance" do
-        assertion_ref = AssertionURIRef.from_xml('<saml:AssertionURIRef>some_uri</saml:AssertionURIRef>')
+        assertion_ref = AssertionURIRef.from_xml('<saml:AssertionURIRef xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion">some_uri</saml:AssertionURIRef>')
         assert_not_nil assertion_ref
         assert_equal 'some_uri', assertion_ref.uri
         assert assertion_ref.valid?
@@ -182,7 +182,7 @@ class AssertionTest < Test::Unit::TestCase
     end
     context "when consuming xml" do
       should "return a valid AssertionIDRef instance" do
-        assertion_ref = AssertionIDRef.from_xml('<saml:AssertionIDRef>some_id</saml:AssertionIDRef>')
+        assertion_ref = AssertionIDRef.from_xml('<saml:AssertionIDRef xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion">some_id</saml:AssertionIDRef>')
         assert_not_nil assertion_ref
         assert_equal 'some_id', assertion_ref.id
         assert assertion_ref.valid?

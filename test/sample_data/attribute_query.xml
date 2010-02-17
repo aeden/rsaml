@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 
-<samlp:AttributeQuery>
+<samlp:AttributeQuery xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion" xmlns:samlp="urn:oasis:names:tc:SAML:2.0:protocol">
   <saml:Subject>
     <saml:NameID>Anthony Eden</saml:NameID>
   </saml:Subject>

@@ -13,6 +13,37 @@ PKG_FILE_NAME   = "#{PKG_NAME}-#{PKG_VERSION}"
 PKG_DESTINATION = ENV["PKG_DESTINATION"] || "../#{PKG_NAME}"
 
 RELEASE_NAME  = "REL #{PKG_VERSION}"
+PKG_FILES = FileList[
+  #'CHANGELOG',
+  #'LICENSE',
+  'README',
+  #'TODO',
+  'Rakefile',
+  'bin/**/*',
+  'doc/**/*',
+  'lib/**/*',
+] - [ 'test' ]
+
+spec = Gem::Specification.new do |s|
+  s.name = 'rsaml'
+  s.version = PKG_VERSION
+  s.summary = "RSAML - SAML implementation in Ruby."
+  s.description = <<-EOF
+    An implementation of SAML in Ruby.
+  EOF
+
+  s.add_dependency('rake', '>= 0.7.1')
+  s.add_dependency('uuid', '>= 1.0.4')
+
+  s.rdoc_options << '--exclude' << '.'
+  s.has_rdoc = false
+
+  s.files = PKG_FILES.to_a.delete_if {|f| f.include?('.svn')}
+  s.require_path = 'lib'
+
+  s.author = "Anthony Eden"
+  s.email = "anthonyeden@gmail.com"
+end
 
 begin
   require 'jeweler'
@@ -30,6 +61,8 @@ begin
     gemspec.add_dependency('activesupport', '>=2.3.4')
     gemspec.add_dependency('uuid', '>=2.1.1')
     gemspec.version = PKG_VERSION
+    gemspec.files = PKG_FILES.to_a.delete_if {|f| f.include?('.svn')}
+    gemspec.require_path = 'lib'
   end
   Jeweler::GemcutterTasks.new
 rescue LoadError
@@ -66,44 +99,6 @@ namespace :rcov do
     system("#{rcov} test/*_test.rb")
     #system("open coverage/index.html") if PLATFORM['darwin']
   end
-end
-
-PKG_FILES = FileList[
-  #'CHANGELOG',
-  #'LICENSE',
-  'README',
-  #'TODO',
-  'Rakefile',
-  'bin/**/*',
-  'doc/**/*',
-  'lib/**/*',
-] - [ 'test' ]
-
-spec = Gem::Specification.new do |s|
-  s.name = 'rsaml'
-  s.version = PKG_VERSION
-  s.summary = "RSAML - SAML implementation in Ruby."
-  s.description = <<-EOF
-    An implementation of SAML in Ruby.
-  EOF
-
-  s.add_dependency('rake', '>= 0.7.1')
-  s.add_dependency('uuid', '>= 1.0.4')
-
-  s.rdoc_options << '--exclude' << '.'
-  s.has_rdoc = false
-
-  s.files = PKG_FILES.to_a.delete_if {|f| f.include?('.svn')}
-  s.require_path = 'lib'
-
-  s.author = "Anthony Eden"
-  s.email = "anthonyeden@gmail.com"
-end
-
-Rake::GemPackageTask.new(spec) do |pkg|
-  pkg.gem_spec = spec
-  pkg.need_tar = true
-  pkg.need_zip = true
 end
 
 desc "Generate code statistics"

@@ -103,7 +103,7 @@ module RSAML #:nodoc:
     def initialize(issuer)
       @issuer = issuer
       @version = "2.0"
-      @id = UUID.new
+      @id = UUID.new.generate
       @issue_instant = Time.now.utc
     end
     

@@ -15,7 +15,13 @@ end
 
 require 'rubygems'
 require 'uuid'
-require 'activesupport'
+begin
+  require 'activesupport'
+rescue LoadError
+  require 'active_support'
+end
+
+require "rexml/document"
 
 $:.unshift(File.dirname(__FILE__))
 
