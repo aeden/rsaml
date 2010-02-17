@@ -13,11 +13,12 @@ class IssuerTest < Test::Unit::TestCase
     end
     context "when producing xml" do
       should "always include format and value" do
-        assert_equal '<saml:Issuer Format="urn:oasis:names:tc:SAML:2.0:nameid-format:entity">Some Issuer</saml:Issuer>', @identifier.to_xml
+        assert @identifier.to_xml.include? 'Format="urn:oasis:names:tc:SAML:2.0:nameid-format:entity"'
+        assert @identifier.to_xml.include? 'Some Issuer'
       end
       should "optionally include a name qualifier" do
         @identifier.name_qualifier = 'a_name_qualifier'
-        assert_equal '<saml:Issuer Format="urn:oasis:names:tc:SAML:2.0:nameid-format:entity" NameQualifier="a_name_qualifier">Some Issuer</saml:Issuer>', @identifier.to_xml
+        assert @identifier.to_xml.include? 'NameQualifier="a_name_qualifier"'
       end
       should "optionally include an service provider name qualifier" do
         @identifier.sp_name_qualifier = 'an_sp_name_qualifier'

@@ -89,7 +89,7 @@ class AssertionTest < Test::Unit::TestCase
       should "optionally include advice" do
         uri = 'http://example.com/some_advice'
         advice = Advice.new
-        advice.assertions << AssertionIDRef.new(UUID.new)
+        advice.assertions << AssertionIDRef.new(UUID.new.generate)
         advice.assertions << AssertionURIRef.new(uri) # a URI
         @assertion.advice << advice
         xml = @assertion.to_xml

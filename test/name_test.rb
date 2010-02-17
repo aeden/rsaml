@@ -13,11 +13,12 @@ class NameTest < Test::Unit::TestCase
     end
     context "when producing xml" do
       should "always include format and value" do
-        assert_equal '<saml:NameID Format="urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified">example</saml:NameID>', @name.to_xml
+        assert @name.to_xml.include? 'Format="urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified"'
+        assert @name.to_xml.include? 'example'
       end
       should "optionally include a name qualifier" do
         @name.name_qualifier = 'a_name_qualifier'
-        assert_equal '<saml:NameID Format="urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified" NameQualifier="a_name_qualifier">example</saml:NameID>', @name.to_xml
+        assert @name.to_xml.include? 'NameQualifier="a_name_qualifier"'
       end
       should "optionally include an service provider name qualifier" do
         @name.sp_name_qualifier = 'an_sp_name_qualifier'
