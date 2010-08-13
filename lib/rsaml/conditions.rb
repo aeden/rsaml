@@ -38,7 +38,7 @@ module RSAML #:nodoc:
     
     # Return true if the conditions collection is empty
     def empty?
-      conditions.length == 0
+      conditions.length == 0 && audience_restrictions.empty?
     end
     
     # Specifies that the assertion is addressed to a particular audience.
