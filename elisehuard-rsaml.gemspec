@@ -4,7 +4,7 @@
 # -*- encoding: utf-8 -*-
 
 Gem::Specification.new do |s|
-  s.name = %q{scashin133-rsaml}
+  s.name = %q{elisehuard-rsaml}
   s.version = "0.1.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
@@ -15,7 +15,7 @@ Gem::Specification.new do |s|
     ruby-friendly and documentation is provided for each class and method. In certain cases the SAML specification is 
     referenced directly and should be considered the final say whenever a question arises regarding SAML implementation.
     }
-  s.email = ["anthonyeden@gmail.com", "scashin133@gmail.com"]
+  s.email = ["anthonyeden@gmail.com", "scashin133@gmail.com", 'elise@elisehuard.be']
   s.extra_rdoc_files = [
     "LICENSE",
      "README"
