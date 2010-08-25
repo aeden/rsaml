@@ -45,8 +45,8 @@ module RSAML #:nodoc:
     def to_xml(xml=Builder::XmlMarkup.new)
      attributes = {}
      attributes['Recipient'] = recipient unless recipient.nil?
-     attributes['NotOnOrAfter'] = not_on_or_after unless not_on_or_after.nil?
-     attributes['NotBefore'] = not_before unless not_before.nil?
+     attributes['NotOnOrAfter'] = not_on_or_after.xmlschema unless not_on_or_after.nil?
+     attributes['NotBefore'] = not_before.xmlschema unless not_before.nil?
      attributes['InResponseTo'] = in_response_to unless in_response_to.nil?
      attributes[ 'Address'] = address unless address.nil?
      xml.tag!('saml:SubjectConfirmationData', attributes)
