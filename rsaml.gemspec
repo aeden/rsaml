@@ -4,7 +4,7 @@
 # -*- encoding: utf-8 -*-
 
 Gem::Specification.new do |s|
-  s.name = %q{elisehuard-rsaml}
+  s.name = %q{rsaml}
   s.version = "0.1.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
@@ -87,7 +87,7 @@ Gem::Specification.new do |s|
      "lib/xml_sig/signed_info.rb",
      "lib/xml_sig/transform.rb"
   ]
-  s.homepage = %q{http://github.com/scashin133/rsaml}
+  s.homepage = %q{http://github.com/aeden/rsaml}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.5}
