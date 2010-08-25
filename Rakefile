@@ -48,15 +48,15 @@ end
 begin
   require 'jeweler'
   Jeweler::Tasks.new do |gemspec|
-    gemspec.name = "scashin133-rsaml"
+    gemspec.name = "rsaml"
     gemspec.summary = "Ruby implementation of the SAML 2.0 Specification"
     gemspec.description = %Q{RSAML is a SAML implementation in Ruby. RSAML currently implements the elements defined in the SAML-Core 2.0 
     specification by defining an object model that mimics the structure of SAML. Method names and attributes have been made 
     ruby-friendly and documentation is provided for each class and method. In certain cases the SAML specification is 
     referenced directly and should be considered the final say whenever a question arises regarding SAML implementation.
     }
-    gemspec.email = ["anthonyeden@gmail.com", "scashin133@gmail.com"]
-    gemspec.homepage = "http://github.com/scashin133/rsaml"
+    gemspec.email = ["anthonyeden@gmail.com", "scashin133@gmail.com", "elise@elisehuard.be"]
+    gemspec.homepage = "http://github.com/aeden/rsaml"
     gemspec.authors = ["Anthony Eden"]
     gemspec.add_dependency('activesupport', '>=2.3.4')
     gemspec.add_dependency('uuid', '>=2.1.1')
