@@ -28,9 +28,8 @@ module RSAML #:nodoc:
     # Construct an XML fragment representing the subject confirmation
     def to_xml(xml=Builder::XmlMarkup.new)
       attributes = {'Method' => method}
-      xml.tag!('saml:SubjectConfirmation', attributes) {
-        xml << subject_confirmation_data.to_xml unless subject_confirmation_data.nil?
-      }
+      subject_confirmation_data_block = Proc.new { xml << subject_confirmation_data.to_xml} if subject_confirmation_data
+      xml.tag!('saml:SubjectConfirmation', attributes, &subject_confirmation_data_block)
     end
   end
 end
